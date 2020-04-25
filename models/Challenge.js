@@ -11,7 +11,8 @@ const challengeSchema = new mongoose.Schema({
   submission_type: String,
   facebook: String,
   twitter: String,
-  reward: String
+  reward: String,
+  submissions: Array
 }, { timestamps: true });
 
 const Challenge = mongoose.model('Challenge', challengeSchema);

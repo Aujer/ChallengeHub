@@ -17,7 +17,7 @@ exports.getChallenge = (req, res) => {
 
 /**
  * POST /challenge-accepted
- * Create a new local account.
+ * Post a new challenge.
  */
 exports.postChallenge = (req, res, next) => {
   const validationErrors = [];
@@ -26,13 +26,18 @@ exports.postChallenge = (req, res, next) => {
     req.flash('errors', validationErrors);
     return res.redirect('/new-challenge');
   }
-  // have to edit this part to work with mongodb and properly store
-  const challenge = new Challenge({
+  /*
+  var challenge = new Challenge({
     challenge_name: req.body.challege_name,
     description: req.body.description
   });
+  */
+  var data = {
+    challenge_name: req.body.challege_name,
+    description: req.body.description
+  }
   var db = req.db;
-  db.collection('New Challenges').insertOne(challenge,function(err, collection) {
+  db.collection('New Challenges').insertOne(data,function(err, collection) {
     if (err) throw err;
     console.log("Challenge uploaded successfully!")
   })

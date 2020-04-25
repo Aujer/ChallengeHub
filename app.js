@@ -54,7 +54,8 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect(process.env.MONGODB_URI);
+var mongoDB = 'mongodb+srv://melody:melody@cluster0-xmgzz.gcp.mongodb.net/test?retryWrites=true&w=majority';
+mongoose.connect(mongoDB, { useNewUrlParser: true });
 mongoose.connection.on('error', (err) => {
   console.error(err);
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
@@ -160,20 +161,6 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 // new
 app.get('/new-challenge', challengeController.getChallenge);
 app.post('/new-challenge', challengeController.postChallenge);
-/*
-app.post('/new-challenge', (req, res) => {
-  var data = {
-    "challenge name": req.body.challenge_name,
-    "description": req.body.description
-  }
-  db.collection('New Challenges').insertOne(data,function(err, collection) {
-    if (err) throw err;
-    console.log("Challenge uploaded successfully!")
-  })
-  req.flash('success', { msg: 'Challenged uploaded!' });
-  res.redirect('new-challenge');
-})
-*/
 app.get('/challenge-submitted', challengeController.getSubmittedChallenge);
 
 

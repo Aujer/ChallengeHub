@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
+const Challenge = require('../models/Challenge');
 
 const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
@@ -11,8 +12,8 @@ const userSchema = new mongoose.Schema({
   emailVerified: Boolean,
 
   // new
-  challenges_issued: Array,
-  challenges_completed: Array,
+  //challenges_issued: [{ type: Schema.Types.ObjectId, ref: 'Challenge' }],
+  //challenges_completed: Array,
 
   snapchat: String,
   facebook: String,
