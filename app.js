@@ -58,7 +58,6 @@ mongoose.connection.on('error', (err) => {
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
   process.exit();
 });
-var db = mongoose.connection;
 
 var db = mongoose.connection;
 
