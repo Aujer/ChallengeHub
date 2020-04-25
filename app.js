@@ -34,6 +34,9 @@ const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 
+// new
+const challengeController = require('./controllers/challenge');
+
 /**
  * API keys and Passport configuration.
  */
@@ -145,6 +148,11 @@ app.post('/account/profile', passportConfig.isAuthenticated, userController.post
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
+
+// new
+app.get('/new-challenge', challengeController.getChallenge);
+app.post('/new-challenge', challengeController.postChallenge);
+app.get('/challenge-submitted', challengeController.getSubmittedChallenge);
 
 /**
  * API examples routes.
