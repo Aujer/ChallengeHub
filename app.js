@@ -152,6 +152,17 @@ app.get('/create', createController.getContact);
 app.post('/create', createController.postContact);
 
 
+// dynamic shit
+
+app.get('/challenges/asd', function(req,res) {
+    res.send({"param" : "qwe"});
+});
+
+app.get('/challenges/:dynamicroute', function(req,res) {
+    res.send({"param" : req.params.dynamicroute});
+});
+
+
 app.get('/account/verify', passportConfig.isAuthenticated, userController.getVerifyEmail);
 app.get('/account/verify/:token', passportConfig.isAuthenticated, userController.getVerifyEmailToken);
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
@@ -159,6 +170,18 @@ app.post('/account/profile', passportConfig.isAuthenticated, userController.post
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
+
+app.post('/', (req, res) => {
+  var data = {
+    "first": req.body.first,
+    "last": req.body.last,
+    "description": req.body.description
+  }
+  db.collection('Challenge_Updates').insertOne(data,function(err, collection){ 
+    if (err) throw err; 
+    console.log("Submission uploaded successfully"); 
+  }); 
+});
 
 app.post('/', (req, res) => {
   var data = {
