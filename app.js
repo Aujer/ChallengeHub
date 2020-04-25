@@ -138,6 +138,9 @@ app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawes
      next();
  });
 
+ app.get('/new-challenge', challengeController.getChallenge);
+ app.post('/new-challenge', challengeController.postChallenge);
+
 app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
