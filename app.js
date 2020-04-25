@@ -57,6 +57,7 @@ mongoose.connection.on('error', (err) => {
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
   process.exit();
 });
+var db = mongoose.connection;
 
 /**
  * Express configuration.
@@ -92,7 +93,8 @@ app.use((req, res, next) => {
     // Multer multipart/form-data handling needs to occur before the Lusca CSRF check.
     next();
   } else {
-    lusca.csrf()(req, res, next);
+    next();
+    //lusca.csrf()(req, res, next);
   }
 });
 app.use(lusca.xframe('SAMEORIGIN'));
@@ -145,6 +147,18 @@ app.post('/account/profile', passportConfig.isAuthenticated, userController.post
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
+
+app.post('/', (req, res) => {
+  var data = {
+    "first": req.body.first,
+    "last": req.body.last,
+    "description": req.body.description
+  }
+  db.collection('Challenge_Updates').insertOne(data,function(err, collection){ 
+    if (err) throw err; 
+    console.log("Submission uploaded successfully"); 
+  }); 
+});
 
 /**
  * API examples routes.
