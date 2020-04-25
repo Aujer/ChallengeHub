@@ -34,6 +34,7 @@ const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 const challengeController = require('./controllers/challenge');
+const createController = require('./controllers/create');
 
 /**
  * API keys and Passport configuration.
@@ -145,6 +146,10 @@ app.post('/contact', contactController.postContact);
 
 app.get('/challenge', challengeController.getContact);
 app.post('/challenge', challengeController.postContact);
+
+
+app.get('/create', createController.getContact);
+app.post('/create', createController.postContact);
 
 
 app.get('/account/verify', passportConfig.isAuthenticated, userController.getVerifyEmail);
