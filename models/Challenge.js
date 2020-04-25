@@ -1,13 +1,22 @@
 const mongoose = require('mongoose');
 
 const challengeSchema = new mongoose.Schema({
-  // user: self
+  _id: mongoose.Schema.Types.ObjectId,
   challenge_name: { type: String, unique: true },
   description: String,
-  creator: String,
-  picture: String,
-  time_start: Date,
-  time_end: Date,
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  created: {
+    type: Date,
+    default: Date.now
+    },
+  picture: Buffer,
+  time_frame: {
+    time_start: Date,
+    time_end: Date,
+  },
   submission_type: String,
   facebook: String,
   twitter: String,
