@@ -1,19 +1,4 @@
 const validator = require('validator');
-<<<<<<< HEAD
-const Challenge = require('../models/Challenge');
-
-
-/**
- * GET /new-challenge
- * New challenge page.
- */
-exports.getChallenge = (req, res) => {
-  if (!req.user) {
-    return res.redirect('/login');
-  }
-  res.render('challenge', {
-    title: 'Start a new challenge!'
-=======
 const nodemailer = require('nodemailer');
 
 /**
@@ -23,63 +8,13 @@ const nodemailer = require('nodemailer');
 exports.getContact = (req, res) => {
   const unknownUser = !(req.user);
 
-  res.render('challenge', {
-    title: 'Challenge',
+  res.render('create', {
+    title: 'Contact',
     unknownUser,
->>>>>>> d825e373f2845fb047cc66835bf1095ecd01285a
   });
 };
 
 /**
-<<<<<<< HEAD
- * POST /challenge-accepted
- * Post a new challenge.
- */
-exports.postChallenge = (req, res, next) => {
-  const validationErrors = [];
-  // if some errors, add to validationErrors
-  if (validationErrors.length) {
-    req.flash('errors', validationErrors);
-    return res.redirect('/new-challenge');
-  }
-  /*
-  var challenge = new Challenge({
-    challenge_name: req.body.challege_name,
-    description: req.body.description
-  });
-  */
-  var data = {
-    challenge_name: req.body.challege_name,
-    description: req.body.description
-  }
-  var db = req.db;
-  db.collection('New Challenges').insertOne(data,function(err, collection) {
-    if (err) throw err;
-    console.log("Challenge uploaded successfully!")
-  })
-
-  // want to create a new web page with this as the challenge and redirect to that web page
-
-  // for now create a temporary rendering
-  req.flash('success', { msg: 'Challenged uploaded!' });
-  res.render('challenge', {
-    title: 'Challenge uploaded!'
-  })
-  //return res.redirect('/challenge-submitted');
-};
-
-/**
- * GET /challenge-submitted
- * Submitted challenge page.
- */
-exports.getSubmittedChallenge = (req, res) => {
-  if (!req.user) {
-    return res.redirect('/login');
-  }
-  res.render('tempChallenge', {
-    title: 'The challenge begins!'
-  });
-=======
  * POST /contact
  * Send a contact form via Nodemailer.
  */
@@ -155,5 +90,4 @@ exports.postContact = (req, res) => {
       req.flash('errors', { msg: 'Error sending the message. Please try again shortly.' });
       return res.redirect('/contact');
     });
->>>>>>> d825e373f2845fb047cc66835bf1095ecd01285a
 };

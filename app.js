@@ -34,6 +34,10 @@ const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 const challengeController = require('./controllers/challenge');
+<<<<<<< HEAD
+=======
+const createController = require('./controllers/create');
+>>>>>>> d825e373f2845fb047cc66835bf1095ecd01285a
 
 /**
  * API keys and Passport configuration.
@@ -58,6 +62,7 @@ mongoose.connection.on('error', (err) => {
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
   process.exit();
 });
+var db = mongoose.connection;
 
 var db = mongoose.connection;
 
@@ -154,6 +159,13 @@ app.get('/challenge', challengeController.getContact);
 app.post('/challenge', challengeController.postContact);
 
 
+<<<<<<< HEAD
+=======
+app.get('/create', createController.getContact);
+app.post('/create', createController.postContact);
+
+
+>>>>>>> d825e373f2845fb047cc66835bf1095ecd01285a
 app.get('/account/verify', passportConfig.isAuthenticated, userController.getVerifyEmail);
 app.get('/account/verify/:token', passportConfig.isAuthenticated, userController.getVerifyEmailToken);
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
@@ -162,12 +174,26 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
+<<<<<<< HEAD
 // new
 app.get('/new-challenge', challengeController.getChallenge);
 app.post('/new-challenge', challengeController.postChallenge);
 app.get('/challenge-submitted', challengeController.getSubmittedChallenge);
 
 
+=======
+app.post('/', (req, res) => {
+  var data = {
+    "first": req.body.first,
+    "last": req.body.last,
+    "description": req.body.description
+  }
+  db.collection('Challenge_Updates').insertOne(data,function(err, collection){ 
+    if (err) throw err; 
+    console.log("Submission uploaded successfully"); 
+  }); 
+});
+>>>>>>> d825e373f2845fb047cc66835bf1095ecd01285a
 
 /**
  * API examples routes.
