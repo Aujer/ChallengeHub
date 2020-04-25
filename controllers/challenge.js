@@ -94,11 +94,8 @@ exports.postContact = (req, res) => {
 
 // Alex's part
 
-const validator = require('validator');
-const nodemailer = require('nodemailer');
 const Challenge = require('../models/Challenge');
 const User = require('../models/User');
-
 
 /**
  * GET /new-challenge

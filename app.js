@@ -130,6 +130,16 @@ app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawes
 /**
  * Primary app routes.
  */
+
+// allows other functions to access db
+ app.use(function(req,res,next){
+     req.db = db;
+     next();
+ });
+
+app.get('/new-challenge', challengeController.getChallenge);
+app.post('/new-challenge', challengeController.postChallenge);
+
 app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
@@ -166,10 +176,10 @@ app.post('/', (req, res) => {
     "last": req.body.last,
     "description": req.body.description
   }
-  db.collection('Challenge_Updates').insertOne(data,function(err, collection){ 
-    if (err) throw err; 
-    console.log("Submission uploaded successfully"); 
-  }); 
+  db.collection('Challenge_Updates').insertOne(data,function(err, collection){
+    if (err) throw err;
+    console.log("Submission uploaded successfully");
+  });
 });
 
 /**
