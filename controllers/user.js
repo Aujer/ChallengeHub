@@ -98,6 +98,8 @@ exports.postSignup = (req, res, next) => {
     password: req.body.password
   });
 
+  // need to add the users to the mongo db as well
+
   User.findOne({ email: req.body.email }, (err, existingUser) => {
     if (err) { return next(err); }
     if (existingUser) {

@@ -1,7 +1,6 @@
 const validator = require('validator');
 const Challenge = require('../models/Challenge');
 
-// want to add way to submit form
 
 /**
  * GET /new-challenge
@@ -21,19 +20,23 @@ exports.getChallenge = (req, res) => {
  * Create a new local account.
  */
 exports.postChallenge = (req, res, next) => {
-  //const validationErrors = [];
+  const validationErrors = [];
   // if some errors, add to validationErrors
-  /*
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
     return res.redirect('/new-challenge');
   }
-  */
-  // have to edit this part to work with mongodb
+  // have to edit this part to work with mongodb and properly store
   const challenge = new Challenge({
     challenge_name: req.body.challege_name,
     description: req.body.description
   });
+  var db = req.db;
+  db.collection('New Challenges').insertOne(challenge,function(err, collection) {
+    if (err) throw err;
+    console.log("Challenge uploaded successfully!")
+  })
+
   // want to create a new web page with this as the challenge and redirect to that web page
 
   // for now create a temporary rendering

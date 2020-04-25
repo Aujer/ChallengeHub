@@ -3,14 +3,14 @@ extends ../layout
 block content
   .pb-2.mt-2.mb-4.border-bottom
     h3 Challenge Information: The Challenge Begins!
-
-  form(action='/tempChallenge', method='POST')
+    
+  form(action='/challenge-submitted', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='challege_name') Challenge Name
       .col-md-7
-        input.form-control(value=challenge.challenge_name)
+        input.form-control(value=user.challenges[0].challenge_name)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='description') Description
       .col-md-7
-        input.form-control(value=challenge.description)
+        input.form-control(value=user.challenges[0].description)

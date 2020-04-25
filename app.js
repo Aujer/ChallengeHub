@@ -61,6 +61,8 @@ mongoose.connection.on('error', (err) => {
   process.exit();
 });
 
+var db = mongoose.connection;
+
 /**
  * Express configuration.
  */
@@ -129,6 +131,12 @@ app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawes
 /**
  * Primary app routes.
  */
+
+ app.use(function(req,res,next){
+     req.db = db;
+     next();
+ });
+
 app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
@@ -152,7 +160,23 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 // new
 app.get('/new-challenge', challengeController.getChallenge);
 app.post('/new-challenge', challengeController.postChallenge);
+/*
+app.post('/new-challenge', (req, res) => {
+  var data = {
+    "challenge name": req.body.challenge_name,
+    "description": req.body.description
+  }
+  db.collection('New Challenges').insertOne(data,function(err, collection) {
+    if (err) throw err;
+    console.log("Challenge uploaded successfully!")
+  })
+  req.flash('success', { msg: 'Challenged uploaded!' });
+  res.redirect('new-challenge');
+})
+*/
 app.get('/challenge-submitted', challengeController.getSubmittedChallenge);
+
+
 
 /**
  * API examples routes.

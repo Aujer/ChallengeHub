@@ -4,6 +4,7 @@ const challengeSchema = new mongoose.Schema({
   // user: self
   challenge_name: { type: String, unique: true },
   description: String,
+  creator: String,
   picture: String,
   time_start: Date,
   time_end: Date,
