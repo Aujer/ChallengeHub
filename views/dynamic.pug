@@ -16,7 +16,8 @@ block content
       p #{reward}
   .row
     form(action='/challenges/signup', method='POST')
-      input(type='submit', name='challenge_name', value=name)
+      input(type="hidden" name="challenge_name" value=name)
+      input(type='submit', name='sign up button', value="Sign Up For This Challenge!")
     //- button(type='button', class=' c-btn-blue c-btn-circle c-btn-uppercase', value="Read More", onclick='clickme()')
 
 
