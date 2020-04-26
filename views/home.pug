@@ -23,6 +23,18 @@ block content
         .col-md-6
           p
           a(href='/challenges/' + val.challenge_name)= val.challenge_name
+  h1 Trending Challenges
+  hr
+  .row
+    each val in popular_challenges
+      .col-md-6
+        p
+        h3 #{val.challenge_name}
+        p #{val.description}
+        p
+          strong Reward:
+          | #{val.reward}
+        a.btn.btn-raised(href='/challenges/' + val.challenge_name, role='button') Check it out! »
 
         
 
