@@ -16,7 +16,9 @@ const uploadSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Challenge'
   },
-  path: String
+  description: String,
+  path: String,
+  name: String
 }, { timestamps: true });
 
 const Upload = mongoose.model('Upload', uploadSchema);

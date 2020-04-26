@@ -173,6 +173,7 @@ app.get('/challenges/:dynamicroute', lusca({ csrf: true }), function(req,res,nam
 
 /** Dynamic page POSTs **/
 app.post('/challenges/signup', dynamicController.postSignUp);
+app.post('/challenges/update-progress', dynamicController.postUpdate);
 
 // app.get('/challenges/:dynamicroute', dynamicController.index);
 

@@ -8,6 +8,7 @@ const subscriptionSchema = new mongoose.Schema({
     unique: true,
     ref: 'User'
   },
+  name: String,
   created: {
     type: Date,
     default: Date.now
