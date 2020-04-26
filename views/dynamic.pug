@@ -14,6 +14,10 @@ block content
       p #{description}
       h3 Reward:
       p #{reward}
+    .col-md-8
+      //- h3 Top Submissions:
+        put the images of the top submissions here
+        input#file(type='file',name='photo', accept='image/*')
   .row
     if is_already_signed_up
       form(action='/challenges/unsubscribe', method='POST')
@@ -45,4 +49,18 @@ block content
               .col-md-6
                 input(type='file', name='myFile')
             button.btn.btn-primary(type='submit') Submit
+    
+    .row
+      h4 Share your progress:
+        form(action='/challenges/update-progress' id='progress-update', method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          input(type="hidden" name="challenge_name" value=name)
+          p
+          label(class='col-form-label font-weight-bold') Tell Us About Your Progress: 
+          input(type='text' name='description' value='')
+          .form-group
+            label.col-form-label.font-weight-bold File Input
+            input(type='file', name='myFile')
+          p 
+          input(type='submit' value='Submit')
     

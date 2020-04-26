@@ -149,6 +149,7 @@ exports.postSignUp = (req, res) => {
 
 	    challenge_name: req.body.challenge_name,
 	    user: req.user,
+	    name: req.user.profile.name,
 	    //creator_name: req.user.profile.name,
 	    created: Date.now(),
 
@@ -172,9 +173,9 @@ exports.postSignUp = (req, res) => {
 * Upload a submission for a challenge.
 */
 exports.postFileUpload = (req, res) => {
-	var file_path = path.resolve(req.file.originalname);
+	//var file_path = path.resolve(req.file.originalname);
+	var file_path = req.file.path;
 	var upload = new Upload({
-    uploader: req.user,
     uploader: req.user,
 		// how to link a challenge to a upload
     created: Date.now(),
@@ -188,3 +189,37 @@ exports.postFileUpload = (req, res) => {
   req.flash('success', { msg: 'File was uploaded successfully.' });
   res.redirect(req.header('Referer'));
 };
+
+/**
+ * POST /update for the challenge
+ * Post a new challenge.
+ */
+exports.postUpdate = (req, res, next) => {
+  const validationErrors = [];
+  // if some errors, add to validationErrors
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect(req.header('Referer'));
+  }
+  //var file_path = path.resolve(req.file.originalname);
+  var update = new Upload({
+    uploader: req.user,
+    name: req.user.profile.name,
+		// how to link a challenge to a upload
+    created: Date.now(),
+    description: req.body.description,
+		//path: file_path
+  });
+  var db = req.db;
+  db.collection('Challenge_Updates').insertOne(update,function(err) {
+    if (err) throw err;
+    console.log("Update uploaded successfully!")
+  })
+  // want to create a new web page with this as the challenge and redirect to that web page
+
+  // for now create a temporary rendering
+  req.flash('success', { msg: 'Successful Update!' });
+  res.redirect(req.header('Referer'));
+  //return res.redirect('/challenge-submitted');
+};
+
