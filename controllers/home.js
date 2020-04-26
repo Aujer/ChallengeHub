@@ -13,14 +13,7 @@ console.log("tammy")
 
 if (req.user) {
 	var query = { "creator": ObjectId(req.user._id) };
-}
-
-else {
-	var query = { "creator": 0 };		
-}
-
-
-console.log(query)
+  console.log(query)
     db.collection("New Challenges").find().toArray(function(err1, result1) {
       if (err1) throw err1;
         db.collection("New Challenges").find(query).toArray(function(err, result) {
@@ -35,6 +28,24 @@ console.log(query)
           
     })
   })
+}
+
+else {
+	var query = { "creator": 0 };		
+  console.log(query)
+    db.collection("New Challenges").find().toArray(function(err1, result1) {
+      if (err1) throw err1;
+      res.render('home', {
+        title: 'Home',
+        city: "tokyo",
+        list_of_challenges: false,
+        popular_challenges:result1.slice(0,5)
+      });
+  })
+}
+
+
+
 
 };
 
