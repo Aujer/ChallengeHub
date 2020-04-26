@@ -206,7 +206,7 @@ exports.postUpdate = (req, res, next) => {
 		// how to link a challenge to a upload
     created: Date.now(),
     description: req.body.description,
-	path: file_path,
+		path: file_path,
 	challenge_name = req.body.challenge_name
   });
   var db = req.db;
