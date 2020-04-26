@@ -33,7 +33,10 @@ exports.postChallenge = (req, res, next) => {
   var challenge = new Challenge({
     challenge_name: req.body.challenge_name,
     description: req.body.description,
-    //creator: req.currentUser,
+    creator: req.user,
+    created: Date.now(),
+    submission_type: req.body.submission_type,
+    reward: req.body.reward
   });
   var db = req.db;
   db.collection('New Challenges').insertOne(challenge,function(err) {
