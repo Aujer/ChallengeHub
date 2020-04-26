@@ -53,7 +53,7 @@ load_challenge_page = (req, res,name,challenge) => {
 					    name: name,
 					    description: challenge['description'],
 					    reward: challenge['reward'],
-					    creator: challenge['creator'],
+					    creator: user.profile.name,
 					    subscribers: result,
 					    numSubscribers: result.length,
 					    is_already_signed_up: false
@@ -77,7 +77,7 @@ load_challenge_page = (req, res,name,challenge) => {
 					    name: name,
 					    description: challenge['description'],
 					    reward: challenge['reward'],
-					    creator: challenge['creator'],
+					    creator: user.profile.name,
 					    subscribers: result,
 					    numSubscribers: result.length,
 					    is_already_signed_up: false
@@ -90,7 +90,7 @@ load_challenge_page = (req, res,name,challenge) => {
 					    name: name,
 					    description: challenge['description'],
 					    reward: challenge['reward'],
-					    creator: challenge['creator'],
+					    creator: user.profile.name,
 					    subscribers: result,
 					    numSubscribers: result.length,
 					    is_already_signed_up: true
