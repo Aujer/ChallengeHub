@@ -41,8 +41,16 @@ load_challenge_page = (req, res,name,challenge) => {
     //var queryNum = { challenge_name: name, user: ObjectId(challenge['creator']) };
     var queryNum = { challenge_name: name };
     db = req.db;
+
     // User.findById(challenge['creator'], (err, user) => {
 	  db.collection("subscriptions").find(queryNum).toArray(function(err, result) {
+	  	creator_real_name = ""
+        db.collection("users").find({ "_id": ObjectId(challenge['creator'])}).toArray(function(err1, result1) {
+        	console.log("ruff")
+        	console.log(result1)
+        	console.log("ruff2")
+        	creator_real_name = result1[0].profile.name
+        });
 
 	    if (err) { return next(err); }
 
@@ -53,7 +61,7 @@ load_challenge_page = (req, res,name,challenge) => {
 					    name: name,
 					    description: challenge['description'],
 					    reward: challenge['reward'],
-					    creator: user.profile.name,
+					    creator: creator_real_name,
 					    subscribers: result,
 					    numSubscribers: result.length,
 					    is_already_signed_up: false
@@ -77,7 +85,7 @@ load_challenge_page = (req, res,name,challenge) => {
 					    name: name,
 					    description: challenge['description'],
 					    reward: challenge['reward'],
-					    creator: user.profile.name,
+					    creator: creator_real_name,
 					    subscribers: result,
 					    numSubscribers: result.length,
 					    is_already_signed_up: false
@@ -90,7 +98,7 @@ load_challenge_page = (req, res,name,challenge) => {
 					    name: name,
 					    description: challenge['description'],
 					    reward: challenge['reward'],
-					    creator: user.profile.name,
+					    creator: creator_real_name,
 					    subscribers: result,
 					    numSubscribers: result.length,
 					    is_already_signed_up: true
