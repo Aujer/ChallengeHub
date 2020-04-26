@@ -39,6 +39,8 @@ load_challenge_page = (req, res,name,challenge) => {
     User.findById(challenge['creator'], (err, user) => {
 		  db.collection("subscriptions").find(queryNum).toArray(function(err, result) {
 		    if (err) { return next(err); }
+		    result.filter(function(entry){ return entry.user.equals("regers")})
+
 		    res.render('dynamic', {
 			    title: 'Dynamic',
 			    name: name,
