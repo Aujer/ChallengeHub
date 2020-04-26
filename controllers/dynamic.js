@@ -93,12 +93,11 @@ exports.postSignUp = (req, res) => {
     db.collection('subscriptions').insertOne(subscription,function(err) {
     if (err) throw err;
     console.log("Challenge uploaded successfully!")
-
     })
 
   } else {
-  	req.flash('success', { msg: 'Challenge accepted!' });
-  	console.log("use is not logged in")
+  	req.flash('Not Logged In', { msg: 'Please log in to join challenge!'});
+  	console.log("use isr not logged in")
   }
 };
 
