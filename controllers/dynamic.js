@@ -4,6 +4,7 @@
 
 const User = require('../models/User');
 const Challenge = require('../models/Challenge');
+const Subscription = require('../models/Subscription');
 const Upload = require('../models/Upload')
 const path = require('path');
 
@@ -60,11 +61,40 @@ load_error_page = (req, res,name) => {
  * POST /challenges/signup
  * Sign up for challenge.
  */
-exports.postSignUp = (req, res, next) => {
-  if (!req.user) {
+exports.postSignUp = (req, res) => {
+	console.log("post sign up is working")
+	console.log(req)
+	console.log(req.headers)
+
+
+  if (req.user) {
+  	req.flash('success', { msg: 'Challenge subscribed!' });
+  	console.log("mamamama")
+  	console.log(req.body)
+  	console.log("papapa")
+
+    backURL=req.header('Referer') || '/';
+
+    res.redirect(backURL);
+
+    var subscription = new Subscription({
+
+	    challenge_name: req.body.challenge_name,
+	    user: req.user,
+	    //creator_name: req.user.profile.name,
+	    created: Date.now(),
+
+  				});
+    var db = req.db;
+    db.collection('subscriptions').insertOne(subscription,function(err) {
+    if (err) throw err;
+    console.log("Challenge uploaded successfully!")
+
+    })
 
   } else {
   	req.flash('success', { msg: 'Challenge accepted!' });
+  	console.log("use is not logged in")
   }
 };
 
