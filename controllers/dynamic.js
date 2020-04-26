@@ -97,20 +97,6 @@ load_challenge_page = (req, res,name,challenge) => {
 					  });	
 	    					}
 	    			}
-	    // console.log("princess")
-	    //  console.log(ObjectId(result[0]._id));
-	    //  console.log(req.user._id);
-	    // console.log("end_princess");
-
-
-
-	  
-
-	    
-
-	    // 	console.log()
-	    // 	return entry.user.equals("regers")})
-	    
 	    
 	  });
 		// });
