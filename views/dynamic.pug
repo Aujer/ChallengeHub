@@ -19,11 +19,18 @@ block content
   .row
     .col-md-8
       h3 Creator:
+<<<<<<< HEAD
       p #{creator} Fix to be name later
+=======
+      p #{creator}
+>>>>>>> 256879ca9ea4d4567ce8625f8d8ac4ecfccd380d
       h3 Description:
       p #{description}
       h3 Reward:
       p #{reward}
+  .row
+    form(action='/challenges/signup' method='POST')
+      input(type='submit' value='Sign Up For This Challenge!')
   .row
     .col-md-8
       h2 People Subscribed to This Challenge

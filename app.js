@@ -195,6 +195,9 @@ app.post('/', (req, res) => {
   });
 });
 
+/** Dynamic page POSTs **/
+app.post('/challenges/signup', dynamicController.signup);
+
 app.post('/', (req, res) => {
   var data = {
     "first": req.body.first,
