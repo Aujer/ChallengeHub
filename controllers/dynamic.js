@@ -53,7 +53,7 @@ load_challenge_page = (req, res,name,challenge) => {
 					    name: name,
 					    description: challenge['description'],
 					    reward: challenge['reward'],
-					    creator: challenge['creator'],
+					    creator: user.profile.name,
 					    subscribers: result,
 					    numSubscribers: result.length,
 					    is_already_signed_up: false
@@ -77,7 +77,7 @@ load_challenge_page = (req, res,name,challenge) => {
 					    name: name,
 					    description: challenge['description'],
 					    reward: challenge['reward'],
-					    creator: challenge['creator'],
+					    creator: user.profile.name,
 					    subscribers: result,
 					    numSubscribers: result.length,
 					    is_already_signed_up: false
@@ -90,27 +90,13 @@ load_challenge_page = (req, res,name,challenge) => {
 					    name: name,
 					    description: challenge['description'],
 					    reward: challenge['reward'],
-					    creator: challenge['creator'],
+					    creator: user.profile.name,
 					    subscribers: result,
 					    numSubscribers: result.length,
 					    is_already_signed_up: true
 					  });	
 	    					}
 	    			}
-	    // console.log("princess")
-	    //  console.log(ObjectId(result[0]._id));
-	    //  console.log(req.user._id);
-	    // console.log("end_princess");
-
-
-
-	  
-
-	    
-
-	    // 	console.log()
-	    // 	return entry.user.equals("regers")})
-	    
 	    
 	  });
 		// });

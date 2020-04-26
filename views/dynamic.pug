@@ -20,6 +20,19 @@ block content
         input#file(type='file',name='photo', accept='image/*')
   .row
     if is_already_signed_up
+      .row
+      h4 Share your progress:
+        form(action='/challenges/update-progress' id='progress-update', method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          input(type="hidden" name="challenge_name" value=name)
+          p
+          label(class='col-form-label') Tell Us About Your Progress:  
+          input(type='text' name='description' value='')
+          .form-group
+            label.col-form-label File Input 
+            input(type='file', name='myFile')
+          p 
+          input(type='submit' value='Submit')
       form(action='/challenges/unsubscribe', method='POST')
         input(type="hidden" name="challenge_name" value=name)
         input(type='submit', name='sign up button', value="Unsubscribe From This Challenge!")
@@ -54,17 +67,4 @@ block content
       ul
             each val in [1, 2, 3, 4, 5]
               li= val
-    .row
-      h4 Share your progress:
-        form(action='/challenges/update-progress' id='progress-update', method='POST')
-          input(type='hidden', name='_csrf', value=_csrf)
-          input(type="hidden" name="challenge_name" value=name)
-          p
-          label(class='col-form-label') Tell Us About Your Progress:  
-          input(type='text' name='description' value='')
-          .form-group
-            label.col-form-label File Input 
-            input(type='file', name='myFile')
-          p 
-          input(type='submit' value='Submit')
     
