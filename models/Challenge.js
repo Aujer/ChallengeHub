@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('../models/User')
 
 const challengeSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -8,6 +9,12 @@ const challengeSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  /*
+  creator_name: {
+    type: mongoose.Schema.Types.String,
+    ref: 'User'
+  },
+  */
   created: {
     type: Date,
     default: Date.now

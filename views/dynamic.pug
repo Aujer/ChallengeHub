@@ -1,20 +1,32 @@
 extends layout
 
 block content
+
+  h1 Finished already? Submit here
+  .row
+    .col-md-6
+      form(role='form', enctype='multipart/form-data', method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .form-group
+          label.col-form-label.font-weight-bold File Input
+          .col-md-6
+            input(type='file', name='myFile')
+        button.btn.btn-primary(type='submit') Submit
+
   h1 #{name} Challenge
   p.lead 
   hr
   .row
     .col-md-8
-      h3 Host:
-      p #{host}
+      h3 Creator:
+      p #{creator} Fix to be name later
       h3 Description:
       p #{description}
       h3 Reward:
       p #{reward}
   .row
     .col-md-8
-      h2 People Subscribed to Your Challenge
+      h2 People Subscribed to This Challenge
       ul
         each val in [1, 2, 3, 4, 5]
           li= val
