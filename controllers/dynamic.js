@@ -92,12 +92,14 @@ exports.postSignUp = (req, res) => {
     var db = req.db;
     db.collection('subscriptions').insertOne(subscription,function(err) {
     if (err) throw err;
-    console.log("Challenge uploaded successfully!")
+    console.log("Challenge uploaded successfully!");
+    res.redirect(req.header('Referer'));
     })
 
   } else {
-  	req.flash('Not Logged In', { msg: 'Please log in to join challenge!'});
-  	console.log("use isr not logged in")
+  	req.flash('success', { msg: 'Please log in to join challenge!'});
+  	console.log("user is not logged in");
+  	res.redirect(req.header('Referer'));
   }
 };
 

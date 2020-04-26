@@ -25,7 +25,7 @@ console.log(query)
           if (err) throw err;
           console.log(result);
           if (req.user) {
-              res.render('home', {
+            res.render('home', {
             title: 'Home',
             city: "tokyo",
             list_of_challenges: result,
