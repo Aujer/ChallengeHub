@@ -33,18 +33,22 @@ exports.index = (req, res,name) => {
 
 
 load_challenge_page = (req, res,name,challenge) => {
-    var ObjectId = require('mongodb').ObjectId;
-    var db=req.db;
+    var queryNum = { challenge_name: name };
+    db = req.db;
     User.findById(challenge['creator'], (err, user) => {
-	    if (err) { return next(err); }
-	    res.render('dynamic', {
-		    title: 'Dynamic',
-		    name: name,
-		    description: challenge['description'],
-		    reward: challenge['reward'],
-		    creator: user.profile.name,
+		  db.collection("subscriptions").find(queryNum).toArray(function(err, result) {
+		    if (err) { return next(err); }
+		    res.render('dynamic', {
+			    title: 'Dynamic',
+			    name: name,
+			    description: challenge['description'],
+			    reward: challenge['reward'],
+			    creator: user.profile.name,
+			    subscribers: result,
+			    numSubscribers: result.length
+			  });
 		  });
-		 });
+		});
 };
 
 

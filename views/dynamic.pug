@@ -24,41 +24,10 @@ block content
             
   .row
     .col-md-8
-      h2 People Subscribed to This Challenge
+      h2 #{numSubscribers} People Subscribed to This Challenge
       ul
         each val in [1, 2, 3, 4, 5]
           li= val
-  .row
-    .col-md-6
-      h2 Your Challenges
-      p This is where we're going to put the challenges that the user is subscribed to. name: user.profile.name
-      p
-      script.
-        console.log('Foo bar');
-      script(src="./script.js")
-        if user
-          
-          p donkey   #{user.profile.name}
-          p
-        else
-          p qpqpq
-          p
-        a.btn.btn-raised(href='#', role='button') View details »
-    .col-md-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-raised(href='#', role='button') View details »
-    .col-md-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-raised(href='#', role='button') View details »
-    .col-md-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-raised(href='#', role='button') View details »
 
     .col-md-6
       h4 Finished already? Submit here
