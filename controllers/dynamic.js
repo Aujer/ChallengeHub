@@ -199,14 +199,15 @@ exports.postUpdate = (req, res, next) => {
     req.flash('errors', validationErrors);
     return res.redirect(req.header('Referer'));
   }
-  //var file_path = path.resolve(req.file.originalname);
+  var file_path = path.resolve(req.myfile);
   var update = new Upload({
     uploader: req.user,
     name: req.user.profile.name,
 		// how to link a challenge to a upload
     created: Date.now(),
     description: req.body.description,
-		//path: file_path
+	path: file_path,
+	challenge_name = req.body.challenge_name
   });
   var db = req.db;
   db.collection('Challenge_Updates').insertOne(update,function(err) {
