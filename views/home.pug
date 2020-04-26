@@ -17,12 +17,6 @@ block content
         a.btn.btn-raised(href='#', role='button') View details »
     .col-md-6
           h2 Challenges you're subscribed to
-  .row
-    h2 Popular Challenges
-      each val in popular_challenges
-        .col-md-6
-          p
-          a(href='/challenges/' + val.challenge_name)= val.challenge_name
   h1 Trending Challenges
   hr
   .row
@@ -32,7 +26,7 @@ block content
         h3 #{val.challenge_name}
         p #{val.description}
         p
-          strong Reward:
+          strong Reward: 
           | #{val.reward}
         a.btn.btn-raised(href='/challenges/' + val.challenge_name, role='button') Check it out! »
 
