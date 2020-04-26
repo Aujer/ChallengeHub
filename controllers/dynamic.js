@@ -131,6 +131,7 @@ exports.postSignUp = (req, res) => {
 	console.log("post sign up is working")
 	console.log(req)
 	console.log(req.headers)
+	backURL=req.header('Referer') || '/';
 
 
   if (req.user) {
