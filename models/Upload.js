@@ -17,6 +17,7 @@ const uploadSchema = new mongoose.Schema({
     ref: 'Challenge'
   },
   description: String,
+  challenge_name: String,
   path: String,
   name: String
 }, { timestamps: true });

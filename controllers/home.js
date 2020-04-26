@@ -23,23 +23,6 @@ console.log(query)
       if (err1) throw err1;
         db.collection("New Challenges").find(query).toArray(function(err, result) {
           if (err) throw err;
-<<<<<<< HEAD
-          console.log(result);
-          if (req.user) {
-            res.render('home', {
-            title: 'Home',
-            city: "tokyo",
-            list_of_challenges: result,
-            popular_challenges: result1.splice(0,6)
-          }); 
-          }
-          else {
-            res.render("home_logged_out", {
-              title: "Home_logged_out",
-              popular_challenges: result1.slice(0,6)
-            });
-          }
-=======
             db.collection("Challenge Uploads").find().toArray(function(err2, result2) {
               if (err2) throw err2;
               console.log(result);
@@ -62,6 +45,5 @@ console.log(query)
 
             })
           })
->>>>>>> 069b88dfadee635925d963509242ef5f5c172704
         })
 });}
