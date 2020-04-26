@@ -5,7 +5,7 @@ const Challenge = require('../models/Challenge');
 const Upload = require('../models/Upload');
 
 const userSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
+  //_id: mongoose.Schema.Types.ObjectId,
   email: { type: String, unique: true },
   password: String,
   passwordResetToken: String,

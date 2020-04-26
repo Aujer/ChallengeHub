@@ -36,6 +36,7 @@ const contactController = require('./controllers/contact');
 const challengeController = require('./controllers/challenge');
 const createController = require('./controllers/create');
 const dynamicController = require('./controllers/dynamic');
+const privacyController = require('./controllers/privacy');
 
 /**
  * API keys and Passport configuration.
@@ -141,6 +142,7 @@ app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawes
 
 app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
+
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
 app.get('/forgot', userController.getForgot);
@@ -160,7 +162,7 @@ app.get('/challenge', challengeController.getChallenges);
 app.post('/challenge', challengeController.postContact);
 
 // dynamic shit
-
+app.get('/privacy', privacyController.getPrivacy);
 // app.get('/challenges/:dynamicroute', function(req,res) {
 //     res.send({"param" : req.params.dynamicroute});
 // });
