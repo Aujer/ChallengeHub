@@ -11,7 +11,15 @@ console.log("dingo")
 console.log(req.user)
 console.log("tammy")
 
-var query = { "creator": ObjectId(req.user._id) };
+if (req.user) {
+	var query = { "creator": ObjectId(req.user._id) };	
+}
+
+else {
+	var query = { "creator": 0 };		
+}
+
+
 console.log(query)
         db.collection("New Challenges").find(query).toArray(function(err, result) {
           if (err) throw err;
