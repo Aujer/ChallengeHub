@@ -5,13 +5,27 @@ const nodemailer = require('nodemailer');
  * GET /contact
  * Contact form page.
  */
-exports.getContact = (req, res) => {
+exports.getChallenges = (req, res) => {
+
   const unknownUser = !(req.user);
 
-  res.render('challenge', {
-    title: 'Challenge',
-    unknownUser,
-  });
+
+    //var query = { challenge_name: name };
+      var db=req.db
+
+        db.collection("New Challenges").find().toArray(function(err, result) {
+          if (err) throw err;
+          console.log(result);
+          res.render('challenge', {
+            title: 'Challenge',
+            city: "tokyo",
+            list_of_challenges: result,
+            unknownUser,
+          });
+          
+    })
+
+  
 };
 
 /**
