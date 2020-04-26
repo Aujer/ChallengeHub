@@ -53,4 +53,19 @@ load_error_page = (req, res,name) => {
   });
 };
 
+/**
+ * POST /challenges/signup
+ * Sign up for challenge.
+ */
+exports.postSignUp = (req, res, next) => {
+  if (!req.user) {
+
+  } else {
+  	req.flash('success', { msg: 'Challenge accepted!' });
+  }
+};
+
+
+
+
 

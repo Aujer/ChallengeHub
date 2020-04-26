@@ -169,6 +169,9 @@ app.get('/challenges/:dynamicroute', function(req,res,name) {
     dynamicController.index(req,res, req.params.dynamicroute)  
 });
 
+/** Dynamic page POSTs **/
+app.post('/challenges/signup', passportConfig.isAuthenticated, dynamicController.postSignup);
+
 // app.get('/challenges/:dynamicroute', dynamicController.index);
 
 
@@ -191,9 +194,6 @@ app.post('/', (req, res) => {
     console.log("Submission uploaded successfully");
   });
 });
-
-/** Dynamic page POSTs **/
-app.post('/challenges/signup', dynamicController.signup);
 
 app.post('/', (req, res) => {
   var data = {
