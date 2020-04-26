@@ -72,7 +72,7 @@ exports.postSignUp = (req, res, next) => {
 * Upload a submission for a challenge.
 */
 exports.postFileUpload = (req, res) => {
-	var file_path = path.resolve('myFile');
+	var file_path = path.resolve(req.file.originalname);
 	var upload = new Upload({
     uploader: req.user,
     uploader: req.user,

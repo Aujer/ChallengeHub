@@ -8,6 +8,10 @@ const uploadSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  created: {
+    type: Date,
+    default: Date.now
+  },
   challenge: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Challenge'
