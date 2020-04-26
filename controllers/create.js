@@ -34,6 +34,7 @@ exports.postChallenge = (req, res, next) => {
     challenge_name: req.body.challenge_name,
     description: req.body.description,
     creator: req.user,
+    //creator_name: req.user.profile.name,
     created: Date.now(),
     submission_type: req.body.submission_type,
     reward: req.body.reward

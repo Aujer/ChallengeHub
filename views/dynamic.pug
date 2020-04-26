@@ -1,13 +1,14 @@
 extends layout
 
 block content
-  h1 #{name} Challenge
+
+  h3 #{name} Challenge
   p.lead 
   hr
   .row
     .col-md-8
       h3 Creator:
-      p #{creator}
+      p #{creator} Fix to be name later
       h3 Description:
       p #{description}
       h3 Reward:
@@ -15,6 +16,7 @@ block content
   .row
     form(action='/challenges/signup' method='POST')
       input(type='submit' value='Sign Up For This Challenge!')
+            
   .row
     .col-md-8
       h2 People Subscribed to This Challenge
@@ -52,13 +54,15 @@ block content
       p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
       p
         a.btn.btn-raised(href='#', role='button') View details »
-  .row
-    form(action='/' method='POST')
-      p
-        | First Name: 
-        input(type='text' name='first' value='')
-        |          Last Name: 
-        input(type='text' name='last' value='')
-        |          Description: 
-        input(type='text' name='description' value='')
-      input(type='submit' value='Submit')
+
+    .col-md-6
+      h4 Finished already? Submit here
+      .row
+        .col-md-6
+          form(role='form', enctype='multipart/form-data', method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            .form-group
+              label.col-form-label.font-weight-bold File Input
+              .col-md-6
+                input(type='file', name='myFile')
+            button.btn.btn-primary(type='submit') Submit

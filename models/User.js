@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
   emailVerified: Boolean,
 
   // new
-  //challenges_issued: [{ type: Schema.Types.ObjectId, ref: 'Challenge' }],
+  challenges_created: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Challenge' }],
   //challenges_completed: Array,
 
   snapchat: String,

@@ -19,6 +19,9 @@ const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
 
+// New, allows for file uploading
+const formidable = require('formidable');
+
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
 /**
@@ -164,9 +167,9 @@ app.post('/challenge', challengeController.postContact);
 //     res.send({"param" : req.params.dynamicroute});
 // });
 
-app.get('/challenges/:dynamicroute', function(req,res,name) {  
+app.get('/challenges/:dynamicroute', function(req,res,name) {
   //var query = { challenge_name: "bob" };
-    dynamicController.index(req,res, req.params.dynamicroute)  
+    dynamicController.index(req,res, req.params.dynamicroute)
 });
 
 /** Dynamic page POSTs **/
@@ -195,16 +198,18 @@ app.post('/', (req, res) => {
   });
 });
 
+/** Dynamic page POSTs **/
+//app.post('/challenges/signup', dynamicController.signup);
 app.post('/', (req, res) => {
   var data = {
     "first": req.body.first,
     "last": req.body.last,
     "description": req.body.description
   }
-  db.collection('Challenge_Updates').insertOne(data,function(err, collection){ 
-    if (err) throw err; 
-    console.log("Submission uploaded successfully"); 
-  }); 
+  db.collection('Challenge_Updates').insertOne(data,function(err, collection){
+    if (err) throw err;
+    console.log("Submission uploaded successfully");
+  });
 });
 
 /**
