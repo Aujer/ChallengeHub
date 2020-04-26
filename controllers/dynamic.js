@@ -41,24 +41,71 @@ load_challenge_page = (req, res,name,challenge) => {
     //var queryNum = { challenge_name: name, user: ObjectId(challenge['creator']) };
     var queryNum = { challenge_name: name };
     db = req.db;
+
     // User.findById(challenge['creator'], (err, user) => {
 	  db.collection("subscriptions").find(queryNum).toArray(function(err, result) {
+	  	creator_real_name = ""
+        db.collection("users").find({ "_id": ObjectId(challenge['creator'])}).toArray(function(err1, result1) {
+        	console.log("ruff")
+        	console.log(result1)
+        	console.log("ruff2")
+        	creator_real_name = result1[0].profile.name
+
+
 	    if (err) { return next(err); }
-	    // result.filter(function(entry){
-	    // 	console.log()
-	    // 	return entry.user.equals("regers")})
-	    console.log('toad');
-	    console.log(result);
-	    console.log('toad');
-	    res.render('dynamic', {
-		    title: 'Dynamic',
-		    name: name,
-		    description: challenge['description'],
-		    reward: challenge['reward'],
-		    creator: challenge['creator'],
-		    subscribers: result,
-		    numSubscribers: result.length
-		  });
+
+		if (result.length  == 0) {
+
+			res.render('dynamic', {
+					    title: 'Dynamic',
+					    name: name,
+					    description: challenge['description'],
+					    reward: challenge['reward'],
+					    creator: creator_real_name,
+					    subscribers: result,
+					    numSubscribers: result.length,
+					    is_already_signed_up: false
+					  });
+	    }
+
+	    else {
+	    	console.log("princess")
+	    	console.log(typeof(result[0].user));
+	    	console.log(result[0].user);
+	    	console.log(typeof(req.user._id))
+	    	console.log(req.user._id)
+	    	console.log("end_princess");
+
+	    	remainder = result.filter(x => x.user.toString() == req.user._id.toString())
+
+	    	if ( remainder.length == 0) {
+	    		console.log("logo");
+				res.render('dynamic', {
+					    title: 'Dynamic',
+					    name: name,
+					    description: challenge['description'],
+					    reward: challenge['reward'],
+					    creator: creator_real_name,
+					    subscribers: result,
+					    numSubscribers: result.length,
+					    is_already_signed_up: false
+					  });
+	    			}
+	    			 else {
+	    			 	console.log("olaf");
+	    				res.render('dynamic', {
+					    title: 'Dynamic',
+					    name: name,
+					    description: challenge['description'],
+					    reward: challenge['reward'],
+					    creator: creator_real_name,
+					    subscribers: result,
+					    numSubscribers: result.length,
+					    is_already_signed_up: true
+					  });
+	    					}
+	    			}
+	     });
 	  });
 		// });
 };
@@ -90,7 +137,7 @@ exports.postSignUp = (req, res) => {
 
     backURL=req.header('Referer') || '/';
 
-    res.redirect(backURL);
+    //res.redirect(backURL);
 
     var subscription = new Subscription({
 
@@ -105,14 +152,14 @@ exports.postSignUp = (req, res) => {
     db.collection('subscriptions').insertOne(subscription,function(err) {
     if (err) throw err;
     console.log("Challenge uploaded successfully!");
-    res.redirect(req.header('Referer'));
+    res.redirect(backURL);
     console.log("flannel")
     })
 
   } else {
   	req.flash('success', { msg: 'Please log in to join challenge!'});
   	console.log("user is not logged in");
-  	res.redirect(req.header('Referer'));
+  	res.redirect(backURL);
   }
 };
 
@@ -132,7 +179,7 @@ exports.postFileUpload = (req, res) => {
     created: Date.now(),
 		path: file_path
   });
-  var db = req.db;
+	var db = req.db;
   db.collection('Challenge Uploads').insertOne(upload,function(err) {
     if (err) throw err;
     console.log("Challenge uploaded successfully!")
