@@ -50,16 +50,3 @@ exports.postChallenge = (req, res, next) => {
   })
   //return res.redirect('/challenge-submitted');
 };
-
-/**
- * GET /challenge-submitted
- * Submitted challenge page.
- */
-exports.getSubmittedChallenge = (req, res) => {
-  if (!req.user) {
-    return res.redirect('/login');
-  }
-  res.render('tempChallenge', {
-    title: 'The challenge begins!'
-  });
-};
