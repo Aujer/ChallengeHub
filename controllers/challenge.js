@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
  * GET /contact
  * Contact form page.
  */
-exports.getContact = (req, res) => {
+exports.getChallenges = (req, res) => {
   const unknownUser = !(req.user);
 
   res.render('challenge', {

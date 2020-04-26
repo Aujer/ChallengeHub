@@ -155,6 +155,9 @@ app.post('/contact', contactController.postContact);
 app.get('/create', createController.getChallenge);
 app.post('/create', createController.postChallenge);
 
+app.get('/challenge', challengeController.getChallenges);
+app.post('/challenge', challengeController.postContact);
+
 // dynamic shit
 
 // app.get('/challenges/:dynamicroute', function(req,res) {
