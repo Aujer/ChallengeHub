@@ -19,9 +19,6 @@ const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
 
-// New, allows for file uploading
-const formidable = require('formidable');
-
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
 /**
@@ -64,6 +61,7 @@ mongoose.connection.on('error', (err) => {
   process.exit();
 });
 var db = mongoose.connection;
+
 
 /**
  * Express configuration.
@@ -161,6 +159,9 @@ app.post('/create', createController.postChallenge);
 app.get('/challenge', challengeController.getChallenges);
 app.post('/challenge', challengeController.postContact);
 
+// posting images
+app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
+
 // dynamic shit
 
 // app.get('/challenges/:dynamicroute', function(req,res) {
@@ -198,18 +199,6 @@ app.post('/', (req, res) => {
 /** Dynamic page POSTs **/
 //app.post('/challenges/signup', dynamicController.signup);
 
-app.post('/', (req, res) => {
-  var data = {
-    "first": req.body.first,
-    "last": req.body.last,
-    "description": req.body.description
-  }
-  db.collection('Challenge_Updates').insertOne(data,function(err, collection){
-    if (err) throw err;
-    console.log("Submission uploaded successfully");
-  });
-});
-
 /**
  * API examples routes.
  */
@@ -237,7 +226,7 @@ app.get('/api/paypal/success', apiController.getPayPalSuccess);
 app.get('/api/paypal/cancel', apiController.getPayPalCancel);
 app.get('/api/lob', apiController.getLob);
 app.get('/api/upload', lusca({ csrf: true }), apiController.getFileUpload);
-app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
+//app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
 app.get('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getPinterest);
 app.post('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postPinterest);
 app.get('/api/here-maps', apiController.getHereMaps);
