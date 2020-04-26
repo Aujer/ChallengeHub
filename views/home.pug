@@ -6,7 +6,7 @@ block content
   hr
   .row
     .col-md-6
-      h2 Challenges you're Hosting
+      h3 Challenges You're Hosting
 
       ul
         each val in list_of_challenges
@@ -14,15 +14,18 @@ block content
           a(href='/challenges/' + val.challenge_name)= val.challenge_name
 
         p
-        a.btn.btn-raised(href='#', role='button') View details »
+        //a.btn.btn-raised(href='#', role='button') View details »
     .col-md-6
-          h2 Challenges you're subscribed to
+          h3 Challenges You're Subscribed To
 
           ul
             each val in subscribed_challenges
               p
-              a(href='/challenges/' + val.challenge_name)= val.challenge_name          
-  h1 Trending Challenges
+              a(href='/challenges/' + val.challenge_name)= val.challenge_name
+
+  p
+  p
+  h2 Trending
   hr
   .row
     each val in popular_challenges

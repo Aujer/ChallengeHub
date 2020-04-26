@@ -13,7 +13,7 @@ exports.getChallenges = (req, res) => {
     //var query = { challenge_name: name };
       var db=req.db
       
-        db.collection("New Challenges").find({"creator": ObjectId(req.user._id)}).toArray(function(err, result) {
+        db.collection("New Challenges").find().toArray(function(err, result) {
           if (err) throw err;
           res.render('challenge', {
             title: 'Challenge',

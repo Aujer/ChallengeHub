@@ -3,7 +3,7 @@ extends layout
 
 block content
 
-  h3 #{name}
+  h1 #{name}
   p.lead 
   hr
   .row
@@ -14,6 +14,10 @@ block content
       p #{description}
       h3 Reward:
       p #{reward}
+
+    .row
+    .col-md-8
+      h2 #{numSubscribers} People Subscribed to This Challenge. See how they're doing!
     .col-md-8
       //- h3 Top Submissions:
         put the images of the top submissions here
@@ -21,12 +25,12 @@ block content
   .row
     if is_already_signed_up
       .col-md-8
-        h4 Share your progress:
+        h5 Tell Us About Your Progress:
           form(action='/challenges/update-progress' id='progress-update', method='POST')
             input(type='hidden', name='_csrf', value=_csrf)
             input(type="hidden" name="challenge_name" value=name)
             p
-            label(class='col-form-label') Tell Us About Your Progress:  
+            label(class='col-form-label') 
             input(type='text' name='description' value='')
             //- .form-group
             //-   label.col-form-label File Input 
@@ -36,7 +40,7 @@ block content
         p
         form(action='/challenges/unsubscribe', method='POST')
           input(type="hidden" name="challenge_name" value=name)
-          input(type='submit', name='sign up button', value="Unsubscribe From This Challenge :(")
+          input(type='submit', name='sign up button', value="Unsubscribe From This Challenge")
     else
       form(action='/challenges/signup', method='POST')
         input(type="hidden" name="challenge_name" value=name)
@@ -45,9 +49,7 @@ block content
 
 
             
-  .row
-    .col-md-8
-      h2 #{numSubscribers} People Subscribed to This Challenge. See how they're doing!
+  
   .row
     .col-md-6
       each val in updates
