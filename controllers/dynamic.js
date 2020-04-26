@@ -26,8 +26,6 @@ exports.index = (req, res,name) => {
 	  
 	};
 
-
-
 load_challenge_page = (req, res,name) => {
   res.render('dynamic', {
 	    title: 'Dynamic',
