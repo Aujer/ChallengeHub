@@ -5,6 +5,12 @@ block content
   p.lead #{name}
   hr
   .row
+    .col-md-1
+      h2 Your Challenges
+      ul
+        each val in [1, 2, 3, 4, 5]
+          li= val
+  .row
     .col-md-6
       h2 Your Challenges
       p This is where we're going to put the challenges that the user is subscribed to. name: user.profile.name
