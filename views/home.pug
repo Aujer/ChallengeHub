@@ -17,6 +17,15 @@ block content
         a.btn.btn-raised(href='#', role='button') View details »
     .col-md-6
           h2 Challenges you're subscribed to
+  .row
+    h2 Popular Challenges
+      each val in popular_challenges
+        .col-md-6
+          p
+          a(href='/challenges/' + val.challenge_name)= val.challenge_name
+
+        
+
           
     
   //- .row

@@ -25,6 +25,18 @@ block content
       p See the photos that other people have uploaded for their challenges. Add comments, and give updates on your goals.
       p
         a.btn.btn-raised(href='#', role='button') View details »
+  h1 Trending Challenges
+  hr
+  .row
+    each val in popular_challenges
+      .col-md-6
+        p
+        h3 #{val.challenge_name}
+        p #{val.description}
+        p
+          strong Reward:
+          | #{val.reward}
+        a.btn.btn-raised(href='/challenges/', role='button') Check it out! »
           
     
   //- .row

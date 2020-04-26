@@ -173,9 +173,6 @@ app.get('/challenges/:dynamicroute', lusca({ csrf: true }), function(req,res,nam
 /** Dynamic page POSTs **/
 app.post('/challenges/signup', dynamicController.postSignUp);
 
-//app.post('/challenges/signup', passportConfig.isAuthenticated, dynamicController.postSignup);
-
-
 // app.get('/challenges/:dynamicroute', dynamicController.index);
 
 app.post('/challenges/:dynamicroute', upload.single('myFile'), lusca({ csrf: true }), dynamicController.postFileUpload);
