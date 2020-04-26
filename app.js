@@ -35,6 +35,7 @@ const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 const challengeController = require('./controllers/challenge');
 const createController = require('./controllers/create');
+const dynamicController = require('./controllers/dynamic');
 
 /**
  * API keys and Passport configuration.
@@ -156,13 +157,15 @@ app.post('/create', createController.postChallenge);
 
 // dynamic shit
 
-app.get('/challenges/asd', function(req,res) {
-    res.send({"param" : "qwe"});
+// app.get('/challenges/:dynamicroute', function(req,res) {
+//     res.send({"param" : req.params.dynamicroute});
+// });
+
+app.get('/challenges/:dynamicroute', function(req,res,name) {  
+    dynamicController.index(req,res, req.params.dynamicroute)
 });
 
-app.get('/challenges/:dynamicroute', function(req,res) {
-    res.send({"param" : req.params.dynamicroute});
-});
+app.get('/challenges/:dynamicroute', dynamicController.index);
 
 
 app.get('/account/verify', passportConfig.isAuthenticated, userController.getVerifyEmail);

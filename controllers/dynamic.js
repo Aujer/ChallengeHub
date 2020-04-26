@@ -1,10 +1,10 @@
 /**
  * GET /
- * dynamic
  */
-exports.index = (req, res) => {
-	 app.get('/api/myruntimeroute', function(req,res) {
-        res.send({"runtime" : "route"});j
+exports.index = (req, res,name) => {
+  res.render('dynamic', {
+    title: 'Dynamic',
+    name: name
   });
 };
 
