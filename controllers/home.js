@@ -5,7 +5,7 @@
 exports.index = (req, res) => {
 
 var db=req.db
-var ObjectId = require('mongodb').ObjectId; 
+var ObjectId = require('mongodb').ObjectId;
 
 console.log("dingo")
 console.log(req.user)
@@ -13,16 +13,37 @@ console.log("tammy")
 
 
 if (req.user) {
-  var query = { "creator": ObjectId(req.user._id) };  
+  var query = { "creator": ObjectId(req.user._id) };
 }
 else {
-  var query = { "creator": 0 };   
+  var query = { "creator": 0 };
 }
 console.log(query)
     db.collection("New Challenges").find().toArray(function(err1, result1) {
       if (err1) throw err1;
         db.collection("New Challenges").find(query).toArray(function(err, result) {
           if (err) throw err;
+<<<<<<< HEAD
+            db.collection("Challenge Uploads").find().toArray(function(err2, result2) {
+              if (err2) throw err2;
+              console.log(result);
+              if (req.user) {
+                  res.render('home', {
+                title: 'Home',
+                city: "tokyo",
+                list_of_challenges: result,
+                popular_challenges: result1.splice(0,6),
+                recent_uploads: result2
+              });
+              }
+              else {
+                res.render("home_logged_out", {
+                  title: "Home_logged_out",
+                  popular_challenges: result1.slice(0,6),
+                  recent_uploads: result2
+                })
+              }
+=======
           console.log(result);
           if (req.user) {
             res.render('home', {
@@ -36,8 +57,8 @@ console.log(query)
             res.render("home_logged_out", {
               title: "Home_logged_out",
               popular_challenges: result1.slice(0,6)
+>>>>>>> ca0f67f91bd81c664fdd3db858f06345bee3f56f
             })
-          }
-    })
-    })
+          })
+        })
 };

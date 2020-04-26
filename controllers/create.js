@@ -41,12 +41,8 @@ exports.postChallenge = (req, res, next) => {
     if (err) throw err;
     console.log("Challenge uploaded successfully!")
   })
-  // want to create a new web page with this as the challenge and redirect to that web page
-
-  // for now create a temporary rendering
   req.flash('success', { msg: 'Challenged created!' });
   res.render('create', {
     title: 'Challenge uploaded!'
   })
-  //return res.redirect('/challenge-submitted');
 };

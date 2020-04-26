@@ -14,6 +14,10 @@ block content
       p #{description}
       h3 Reward:
       p #{reward}
+    .col-md-8
+      //- h3 Top Submissions:
+        put the images of the top submissions here
+        input#file(type='file',name='photo', accept='image/*')
   .row
     form(action='/challenges/signup', method='POST')
       input(type="hidden" name="challenge_name" value=name)
