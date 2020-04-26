@@ -2,6 +2,8 @@
  * GET /
  */
 
+const User = require('../models/User');
+
 
 exports.index = (req, res,name) => {
 
@@ -19,7 +21,7 @@ exports.index = (req, res,name) => {
 	      console.log("potato")
 	    }
 	    else {
-	     load_challenge_page(req,res,name,result[0])  
+	      load_challenge_page(req,res,name,result[0])  
 	    }
 	  })
 
@@ -28,13 +30,18 @@ exports.index = (req, res,name) => {
 
 
 load_challenge_page = (req, res,name,challenge) => {
-  res.render('dynamic', {
-	    title: 'Dynamic',
-	    name: name,
-	    description: challenge['description'],
-	    reward: challenge['reward'],
-	    creator: challenge['creator']
-	  });
+    var ObjectId = require('mongodb').ObjectId; 
+    var db=req.db;
+    User.findById(challenge['creator'], (err, user) => {
+	    if (err) { return next(err); }
+	    res.render('dynamic', {
+		    title: 'Dynamic',
+		    name: name,
+		    description: challenge['description'],
+		    reward: challenge['reward'],
+		    creator: user.profile.name,
+		  });
+		 });
 };
 
 
