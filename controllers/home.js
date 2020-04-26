@@ -24,11 +24,18 @@ console.log(query)
         db.collection("New Challenges").find(query).toArray(function(err, result) {
           if (err) throw err;
           console.log(result);
-          res.render('home', {
+          if (req.user) {
+          		res.render('home', {
             title: 'Home',
             city: "tokyo",
             list_of_challenges: result,
-          });
+          });	
+          }
+          else {
+          	res.render("home_logged_out", {
+          		title: "Home_logged_out"
+          	})
+          }
           
     })
 

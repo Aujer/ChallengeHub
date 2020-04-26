@@ -173,7 +173,7 @@ app.get('/challenges/:dynamicroute', function(req,res,name) {
 });
 
 /** Dynamic page POSTs **/
-app.post('/challenges/signup', passportConfig.isAuthenticated, dynamicController.postSignup);
+app.post('/challenges/signup', dynamicController.postSignUp);
 
 // app.get('/challenges/:dynamicroute', dynamicController.index);
 

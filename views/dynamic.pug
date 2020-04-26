@@ -1,5 +1,15 @@
 extends layout
 
+block head
+  script.
+    /* If onclick event call then
+    this script will run */
+    var onclick_event = function() {
+      console.log("!@#!@#!@#!@#!@#!@#");
+    }
+
+
+
 block content
 
   h3 #{name} Challenge
@@ -14,8 +24,11 @@ block content
       h3 Reward:
       p #{reward}
   .row
-    form(action='/challenges/signup' method='POST')
-      input(type='submit' value='Sign Up For This Challenge!')
+    //- form(action='/challenges/signup', method='POST')
+    //-   input(type='submit', name='challenge_name', value=name)
+    button(type='button' onclick='onclick_event()') Sign up for this Challenge!
+
+
             
   .row
     .col-md-8
