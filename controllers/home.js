@@ -3,8 +3,8 @@
  * Home page.
  */
 exports.index = (req, res) => {
-  res.render('dynamic', {
-    title: 'Dynamic'
+  res.render('home', {
+    title: 'Home'
   });
 };
 
