@@ -55,7 +55,7 @@ load_challenge_page = (req, res,name,challenge) => {
 
 			    if (err) { return next(err); }
 
-				if (result.length  == 0) {
+				if (result.length  == 0 || (!req.user)) {
 
 					res.render('dynamic', {
 					    title: 'Dynamic',
@@ -71,12 +71,11 @@ load_challenge_page = (req, res,name,challenge) => {
 			    }
 
 			    else {
-			    	console.log("princess")
-			    	console.log(typeof(result[0].user));
-			    	console.log(result[0].user);
-			    	console.log(typeof(req.user._id))
-			    	console.log(req.user._id)
-			    	console.log("end_princess");
+			    	// console.log("princess")
+			    	// console.log(typeof(result[0].user));
+			    	// console.log(result[0].user);
+			    	// console.log(req.user._id)
+			    	// console.log("end_princess");
 
 			    	remainder = result.filter(x => x.user.toString() == req.user._id.toString())
 
