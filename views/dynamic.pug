@@ -1,8 +1,8 @@
 extends layout
 
 block content
-  h1 Challenge Hub
-  p.lead #{name}
+  h1 #{name} Challenge
+  p.lead 
   hr
   .row
     .col-md-1
@@ -15,7 +15,11 @@ block content
       h2 Your Challenges
       p This is where we're going to put the challenges that the user is subscribed to. name: user.profile.name
       p
+      script.
+        console.log('Foo bar');
+      script(src="./script.js")
         if user
+          
           p donkey   #{user.profile.name}
           p
         else
