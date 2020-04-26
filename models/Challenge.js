@@ -9,12 +9,6 @@ const challengeSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  /*
-  creator_name: {
-    type: mongoose.Schema.Types.String,
-    ref: 'User'
-  },
-  */
   created: {
     type: Date,
     default: Date.now

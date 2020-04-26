@@ -15,7 +15,6 @@ exports.getChallenges = (req, res) => {
 
         db.collection("New Challenges").find().toArray(function(err, result) {
           if (err) throw err;
-          console.log(result);
           res.render('challenge', {
             title: 'Challenge',
             city: "tokyo",

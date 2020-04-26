@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 const Challenge = require('../models/Challenge');
+const Upload = require('../models/Upload');
 
 const userSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -14,7 +15,7 @@ const userSchema = new mongoose.Schema({
 
   // new
   challenges_created: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Challenge' }],
-  //challenges_completed: Array,
+  challenges_completed: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Upload' }],
 
   snapchat: String,
   facebook: String,
