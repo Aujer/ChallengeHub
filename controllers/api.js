@@ -778,7 +778,7 @@ exports.getGoogleMaps = (req, res) => {
     google_map_api_key: process.env.GOOGLE_MAP_API_KEY
   });
 };
-
+/*
 exports.getGoogleDrive = (req, res) => {
   const token = req.user.tokens.find((token) => token.kind === 'google');
   const authObj = new google.auth.OAuth2({
@@ -803,6 +803,7 @@ exports.getGoogleDrive = (req, res) => {
     });
   });
 };
+
 
 exports.getGoogleSheets = (req, res) => {
   const token = req.user.tokens.find((token) => token.kind === 'google');
@@ -833,3 +834,4 @@ exports.getGoogleSheets = (req, res) => {
     });
   });
 };
+*/
