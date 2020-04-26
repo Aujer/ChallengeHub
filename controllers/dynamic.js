@@ -7,7 +7,7 @@ const Challenge = require('../models/Challenge');
 const Subscription = require('../models/Subscription');
 const Upload = require('../models/Upload')
 const path = require('path');
-var ObjectId = require('mongodb').ObjectId; 
+var ObjectId = require('mongodb').ObjectId;
 
 
 exports.index = (req, res,name) => {
@@ -44,7 +44,7 @@ load_challenge_page = (req, res,name,challenge) => {
     // User.findById(challenge['creator'], (err, user) => {
 	  db.collection("subscriptions").find(queryNum).toArray(function(err, result) {
 	    if (err) { return next(err); }
-	    // result.filter(function(entry){ 
+	    // result.filter(function(entry){
 	    // 	console.log()
 	    // 	return entry.user.equals("regers")})
 	    console.log('toad');
@@ -121,10 +121,14 @@ exports.postSignUp = (req, res) => {
 */
 exports.postFileUpload = (req, res) => {
 	//var file_path = path.resolve(req.file.originalname);
+	//var queryNum = { challenge_name: name };
+	//var db = req.db;
 	var file_path = req.file.path;
 	var upload = new Upload({
     uploader: req.user,
 		// how to link a challenge to a upload
+		//challenge: db.collection("New Challenges").find(queryNum),
+		//
     created: Date.now(),
 		path: file_path
   });
@@ -169,4 +173,3 @@ exports.postUpdate = (req, res, next) => {
   res.redirect(req.header('Referer'));
   //return res.redirect('/challenge-submitted');
 };
-

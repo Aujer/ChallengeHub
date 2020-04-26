@@ -12,6 +12,7 @@ const uploadSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
+  // still need to link the upload to the specific challenge
   challenge: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Challenge'

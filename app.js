@@ -71,7 +71,6 @@ app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(expressStatusMonitor());
-app.use(express.static('ChallengeHub'));
 app.use(compression());
 app.use(sass({
   src: path.join(__dirname, 'public'),
@@ -129,6 +128,8 @@ app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/popper.js/d
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js'), { maxAge: 31557600000 }));
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/jquery/dist'), { maxAge: 31557600000 }));
 app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free/webfonts'), { maxAge: 31557600000 }));
+// attempting to be able to access local uploads
+app.use('/', express.static(path.join(__dirname, 'uploads'), { maxAge: 31557600000 }))
 
 /**
  * Primary app routes.
