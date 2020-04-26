@@ -6,7 +6,15 @@ block content
   hr
   .row
     .col-md-8
-      h2 People Subscribted to Your Challenge
+      h3 Host:
+      p #{host}
+      h3 Description:
+      p #{description}
+      h3 Reward:
+      p #{reward}
+  .row
+    .col-md-8
+      h2 People Subscribed to Your Challenge
       ul
         each val in [1, 2, 3, 4, 5]
           li= val

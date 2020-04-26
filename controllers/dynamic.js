@@ -8,7 +8,7 @@ exports.index = (req, res,name) => {
 	var query = { challenge_name: name };
 	var db=req.db
 
-	  db.collection("New Challenges").find(query).toArray(function(err, result) {
+	db.collection("New Challenges").find(query).toArray(function(err, result) {
 	    
 	    if (err) throw err;
 	    console.log(result);
@@ -19,7 +19,7 @@ exports.index = (req, res,name) => {
 	      console.log("potato")
 	    }
 	    else {
-	     load_challenge_page(req,res,name)  
+	     load_challenge_page(req,res,name,result[0])  
 	    }
 	  })
 
@@ -27,10 +27,13 @@ exports.index = (req, res,name) => {
 	};
 
 
-load_challenge_page = (req, res,name) => {
+load_challenge_page = (req, res,name,challenge) => {
   res.render('dynamic', {
 	    title: 'Dynamic',
-	    name: name
+	    name: name,
+	    description: challenge['description'],
+	    reward: challenge['reward'],
+	    creator: challenge['creator']
 	  });
 };
 
