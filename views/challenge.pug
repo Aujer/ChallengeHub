@@ -6,12 +6,10 @@ block content
     hr
     .row
       .col-md-6
-        p taco taco
+        p Here are all the challenges
         - var challenge_list = list_of_challenges
         ul
-          each val in challenge_list
-           li= val.challenge_name
-        
-         
-        
+          each val in list_of_challenges
+            p
+            a(href='/challenges/' + val.challenge_name)= val.challenge_name
 
