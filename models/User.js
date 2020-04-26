@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
 
   // new
   challenges_created: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Challenge' }],
-  //challenges_completed: Array,
+  challenges_completed: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Upload' }],
 
   snapchat: String,
   facebook: String,

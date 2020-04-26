@@ -159,24 +159,23 @@ app.post('/create', createController.postChallenge);
 app.get('/challenge', challengeController.getChallenges);
 app.post('/challenge', challengeController.postContact);
 
-// posting images
-app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
-
 // dynamic shit
 
 // app.get('/challenges/:dynamicroute', function(req,res) {
 //     res.send({"param" : req.params.dynamicroute});
 // });
 
-app.get('/challenges/:dynamicroute', function(req,res,name) {
+app.get('/challenges/:dynamicroute', lusca({ csrf: true }), function(req,res,name) {
   //var query = { challenge_name: "bob" };
     dynamicController.index(req,res, req.params.dynamicroute)
 });
 
 /** Dynamic page POSTs **/
-app.post('/challenges/signup', passportConfig.isAuthenticated, dynamicController.postSignup);
+//app.post('/challenges/signup', passportConfig.isAuthenticated, dynamicController.postSignup);
 
 // app.get('/challenges/:dynamicroute', dynamicController.index);
+
+app.post('/challenges/:dynamicroute', upload.single('myFile'), lusca({ csrf: true }), dynamicController.postFileUpload);
 
 
 app.get('/account/verify', passportConfig.isAuthenticated, userController.getVerifyEmail);
@@ -201,20 +200,6 @@ app.post('/', (req, res) => {
 
 /** Dynamic page POSTs **/
 //app.post('/challenges/signup', dynamicController.signup);
-<<<<<<< HEAD
-=======
-app.post('/', (req, res) => {
-  var data = {
-    "first": req.body.first,
-    "last": req.body.last,
-    "description": req.body.description
-  }
-  db.collection('Challenge_Updates').insertOne(data,function(err, collection){
-    if (err) throw err;
-    console.log("Submission uploaded successfully");
-  });
-});
->>>>>>> 9156ef715391d0fd5d38181e272f1a985b98d579
 
 /**
  * API examples routes.
@@ -243,7 +228,7 @@ app.get('/api/paypal/success', apiController.getPayPalSuccess);
 app.get('/api/paypal/cancel', apiController.getPayPalCancel);
 app.get('/api/lob', apiController.getLob);
 app.get('/api/upload', lusca({ csrf: true }), apiController.getFileUpload);
-//app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
+app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
 app.get('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getPinterest);
 app.post('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postPinterest);
 app.get('/api/here-maps', apiController.getHereMaps);
