@@ -33,28 +33,32 @@ block content
         each val in [1, 2, 3, 4, 5]
           li= val
 
-    .col-md-6
-      h4 Finished already? Submit here
-      .row
-        .col-md-6
-          form(role='form', enctype='multipart/form-data', method='POST')
-            input(type='hidden', name='_csrf', value=_csrf)
-            .form-group
-              label.col-form-label.font-weight-bold File Input
-              .col-md-6
-                input(type='file', name='myFile')
-            button.btn.btn-primary(type='submit') Submit
+    //- .col-md-6
+    //-   h4 Finished already? Submit here
+    //-   .row
+    //-     .col-md-6
+    //-       form(role='form', enctype='multipart/form-data', method='POST')
+    //-         input(type='hidden', name='_csrf', value=_csrf)
+    //-         .form-group
+    //-           label.col-form-label.font-weight-bold File Input
+    //-           .col-md-6
+    //-             input(type='file', name='myFile')
+    //-         button.btn.btn-primary(type='submit') Submit
     
+    .row 
+      ul
+            each val in [1, 2, 3, 4, 5]
+              li= val
     .row
       h4 Share your progress:
         form(action='/challenges/update-progress' id='progress-update', method='POST')
           input(type='hidden', name='_csrf', value=_csrf)
           input(type="hidden" name="challenge_name" value=name)
           p
-          label(class='col-form-label font-weight-bold') Tell Us About Your Progress: 
+          label(class='col-form-label') Tell Us About Your Progress:  
           input(type='text' name='description' value='')
           .form-group
-            label.col-form-label.font-weight-bold File Input
+            label.col-form-label File Input 
             input(type='file', name='myFile')
           p 
           input(type='submit' value='Submit')
