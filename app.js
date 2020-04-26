@@ -163,26 +163,7 @@ app.post('/create', createController.postChallenge);
 
 app.get('/challenges/:dynamicroute', function(req,res,name) {  
   //var query = { challenge_name: "bob" };
-  var query = { challenge_name: req.params.dynamicroute };
-  db.collection("New Challenges").find(query).toArray(function(err, result) {
-
-    
-    if (err) throw err;
-    console.log(result);
-    if (result.length == 0) {
-      // This means we can't find the challenge
-      console.log("sorry can't find your challenge homie")
-      dynamicController.error(req,res, req.params.dynamicroute)
-      console.log("potato")
-    
-    }
-    else {
-      dynamicController.index(req,res, req.params.dynamicroute)  
-    }
-  })
-
-
-    
+    dynamicController.index(req,res, req.params.dynamicroute)  
 });
 
 // app.get('/challenges/:dynamicroute', dynamicController.index);
