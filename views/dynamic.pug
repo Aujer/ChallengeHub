@@ -17,7 +17,14 @@ block content
 
     .row
     .col-md-8
-      h2 #{numSubscribers} People Subscribed to This Challenge. See how they're doing!
+      h6 #{numSubscribers} People Subscribed to This Challenge. See how they're doing!
+      p
+
+      .row
+        .col-md-6
+          each val in updates
+            p On #{val.created}
+            p #{val.name} said: #{val.description}
     .col-md-8
       //- h3 Top Submissions:
         put the images of the top submissions here
@@ -25,7 +32,7 @@ block content
   .row
     if is_already_signed_up
       .col-md-8
-        h5 Tell Us About Your Progress:
+        h6 Tell Us About Your Progress:
           form(action='/challenges/update-progress' id='progress-update', method='POST')
             input(type='hidden', name='_csrf', value=_csrf)
             input(type="hidden" name="challenge_name" value=name)
@@ -50,12 +57,7 @@ block content
 
             
   
-  .row
-    .col-md-6
-      each val in updates
-        p On #{val.created}
-        p #{val.name} said:
-        p #{val.description}
+
 
     //- .col-md-6
     //-   h4 Finished already? Submit here
