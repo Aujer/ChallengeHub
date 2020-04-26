@@ -20,22 +20,23 @@ block content
         input#file(type='file',name='photo', accept='image/*')
   .row
     if is_already_signed_up
-      .row
-      h4 Share your progress:
-        form(action='/challenges/update-progress' id='progress-update', method='POST')
-          input(type='hidden', name='_csrf', value=_csrf)
+      .col-md-8
+        h4 Share your progress:
+          form(action='/challenges/update-progress' id='progress-update', method='POST')
+            input(type='hidden', name='_csrf', value=_csrf)
+            input(type="hidden" name="challenge_name" value=name)
+            p
+            label(class='col-form-label') Tell Us About Your Progress:  
+            input(type='text' name='description' value='')
+            //- .form-group
+            //-   label.col-form-label File Input 
+            //-   input(type='file', name='myFile')
+            p 
+            input(type='submit' value='Submit')
+        p
+        form(action='/challenges/unsubscribe', method='POST')
           input(type="hidden" name="challenge_name" value=name)
-          p
-          label(class='col-form-label') Tell Us About Your Progress:  
-          input(type='text' name='description' value='')
-          .form-group
-            label.col-form-label File Input 
-            input(type='file', name='myFile')
-          p 
-          input(type='submit' value='Submit')
-      form(action='/challenges/unsubscribe', method='POST')
-        input(type="hidden" name="challenge_name" value=name)
-        input(type='submit', name='sign up button', value="Unsubscribe From This Challenge!")
+          input(type='submit', name='sign up button', value="Unsubscribe From This Challenge :(")
     else
       form(action='/challenges/signup', method='POST')
         input(type="hidden" name="challenge_name" value=name)
@@ -46,10 +47,13 @@ block content
             
   .row
     .col-md-8
-      h2 #{numSubscribers} People Subscribed to This Challenge
-      ul
-        each val in [1, 2, 3, 4, 5]
-          li= val
+      h2 #{numSubscribers} People Subscribed to This Challenge. See how they're doing!
+  .row
+    .col-md-6
+      each val in updates
+        p On #{val.created}
+        p #{val.name} said:
+        p #{val.description}
 
     //- .col-md-6
     //-   h4 Finished already? Submit here
@@ -62,9 +66,5 @@ block content
     //-           .col-md-6
     //-             input(type='file', name='myFile')
     //-         button.btn.btn-primary(type='submit') Submit
-    
-    .row 
-      ul
-            each val in [1, 2, 3, 4, 5]
-              li= val
-    
+  
+  

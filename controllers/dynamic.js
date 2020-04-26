@@ -46,17 +46,18 @@ load_challenge_page = (req, res,name,challenge) => {
 	  db.collection("subscriptions").find(queryNum).toArray(function(err, result) {
 	  	creator_real_name = ""
         db.collection("users").find({ "_id": ObjectId(challenge['creator'])}).toArray(function(err1, result1) {
-        	console.log("ruff")
-        	console.log(result1)
-        	console.log("ruff2")
-        	creator_real_name = result1[0].profile.name
+		    db.collection("Challenge_Updates").find({ "challenge_name": name}).toArray(function(err1, result2) {
+		    	console.log("ruff")
+		    	console.log(result1)
+		    	console.log("ruff2")
+		    	creator_real_name = result1[0].profile.name
 
 
-	    if (err) { return next(err); }
+			    if (err) { return next(err); }
 
-		if (result.length  == 0) {
+				if (result.length  == 0) {
 
-			res.render('dynamic', {
+					res.render('dynamic', {
 					    title: 'Dynamic',
 					    name: name,
 					    description: challenge['description'],
@@ -64,34 +65,36 @@ load_challenge_page = (req, res,name,challenge) => {
 					    creator: creator_real_name,
 					    subscribers: result,
 					    numSubscribers: result.length,
+					    updates: result2,
 					    is_already_signed_up: false
 					  });
-	    }
+			    }
 
-	    else {
-	    	console.log("princess")
-	    	console.log(typeof(result[0].user));
-	    	console.log(result[0].user);
-	    	console.log(typeof(req.user._id))
-	    	console.log(req.user._id)
-	    	console.log("end_princess");
+			    else {
+			    	console.log("princess")
+			    	console.log(typeof(result[0].user));
+			    	console.log(result[0].user);
+			    	console.log(typeof(req.user._id))
+			    	console.log(req.user._id)
+			    	console.log("end_princess");
 
-	    	remainder = result.filter(x => x.user.toString() == req.user._id.toString())
+			    	remainder = result.filter(x => x.user.toString() == req.user._id.toString())
 
-	    	if ( remainder.length == 0) {
-	    		console.log("logo");
-				res.render('dynamic', {
-					    title: 'Dynamic',
-					    name: name,
-					    description: challenge['description'],
-					    reward: challenge['reward'],
-					    creator: creator_real_name,
-					    subscribers: result,
-					    numSubscribers: result.length,
-					    is_already_signed_up: false
-					  });
+			    	if ( remainder.length == 0) {
+			    		console.log("logo");
+						res.render('dynamic', {
+						    title: 'Dynamic',
+						    name: name,
+						    description: challenge['description'],
+						    reward: challenge['reward'],
+						    creator: creator_real_name,
+						    subscribers: result,
+						    numSubscribers: result.length,
+						    updates: result2,
+						    is_already_signed_up: false
+						  	});
 	    			}
-	    			 else {
+	    			else {
 	    			 	console.log("olaf");
 	    				res.render('dynamic', {
 					    title: 'Dynamic',
@@ -101,10 +104,12 @@ load_challenge_page = (req, res,name,challenge) => {
 					    creator: creator_real_name,
 					    subscribers: result,
 					    numSubscribers: result.length,
+					    updates: result2,
 					    is_already_signed_up: true
 					  });
 	    					}
 	    			}
+	     	});
 	     });
 	  });
 		// });
@@ -199,15 +204,15 @@ exports.postUpdate = (req, res, next) => {
     req.flash('errors', validationErrors);
     return res.redirect(req.header('Referer'));
   }
-  var file_path = path.resolve(req.myfile);
+  //var file_path = path.resolve(req.myfile);
   var update = new Upload({
     uploader: req.user,
     name: req.user.profile.name,
 		// how to link a challenge to a upload
     created: Date.now(),
     description: req.body.description,
-		path: file_path,
-	challenge_name = req.body.challenge_name
+	//path: file_path,
+	challenge_name: req.body.challenge_name
   });
   var db = req.db;
   db.collection('Challenge_Updates').insertOne(update,function(err) {

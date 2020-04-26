@@ -1,6 +1,6 @@
 const validator = require('validator');
 const nodemailer = require('nodemailer');
-
+var ObjectId = require('mongodb').ObjectId;
 /**
  * GET /contact
  * Contact form page.
@@ -12,19 +12,17 @@ exports.getChallenges = (req, res) => {
 
     //var query = { challenge_name: name };
       var db=req.db
-
-        db.collection("New Challenges").find().toArray(function(err, result) {
+      
+        db.collection("New Challenges").find({"creator": ObjectId(req.user._id)}).toArray(function(err, result) {
           if (err) throw err;
           res.render('challenge', {
             title: 'Challenge',
             city: "tokyo",
             list_of_challenges: result,
             unknownUser,
-          });
-          
-    })
+            });
 
-  
+    });
 };
 
 /**
