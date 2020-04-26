@@ -50,7 +50,7 @@ load_challenge_page = (req, res,name,challenge) => {
         	console.log(result1)
         	console.log("ruff2")
         	creator_real_name = result1[0].profile.name
-        });
+       
 
 	    if (err) { return next(err); }
 
@@ -105,7 +105,7 @@ load_challenge_page = (req, res,name,challenge) => {
 					  });	
 	    					}
 	    			}
-	    
+	     });
 	  });
 		// });
 };
