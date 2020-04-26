@@ -87,6 +87,7 @@ exports.postSignUp = (req, res) => {
 
 	    challenge_name: req.body.challenge_name,
 	    user: req.user,
+	    name: req.user.profile.name,
 	    //creator_name: req.user.profile.name,
 	    created: Date.now(),
 
