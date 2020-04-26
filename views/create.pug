@@ -12,6 +12,7 @@ block content
       input(type='text' name='description' value='')
       input(type='submit' value='Submit')
 
+<<<<<<< HEAD
   //-form(method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     if (unknownUser)
@@ -32,3 +33,38 @@ block content
         button.btn.btn-primary(type='submit')
           i.far.fa-envelope.fa-sm
           | Send
+=======
+  //- form(method='POST')
+  //-   input(type='hidden', name='_csrf', value=_csrf)
+  //-   if (unknownUser)
+  //-     .form-group.row
+  //-       label(class='col-md-2 col-form-label font-weight-bold', for='name') Name
+  //-       .col-md-8
+  //-         input.form-control(type='text', name='name', id='name', autocomplete='name', autofocus, required)
+  //-     .form-group.row
+  //-       label(class='col-md-2 col-form-label font-weight-bold', for='email') Email
+  //-       .col-md-8
+  //-         input.form-control(type='email', name='email', id='email', autocomplete='email', required)
+  //-   .form-group.row
+  //-     label(class='col-md-2 col-form-label font-weight-bold', for='message') What is your challenge?
+  //-     .col-md-8
+  //-       textarea.form-control(name='message', id='message', rows='7', autofocus=(!unknownUser).toString(), required)
+  //-   .form-group
+  //-     .offset-md-2.col-md-8.p-1
+  //-       button.btn.btn-primary(type='submit')
+  //-         i.far.fa-envelope.fa-sm
+  //-         | Send
+
+  form(action='/' method='POST')
+      p
+        | Challenge Title:  
+        input(type='text' name='challenge_name' value='')
+        
+        |  Description: 
+        input(type='text' name='description' value='')
+
+        |          Reward: 
+        input(type='text' name='reward' value='')
+
+      input(type='submit' value='Submit')
+>>>>>>> 0f39095a8e8fa09471b172bcac0c1b58ef0e8dd4

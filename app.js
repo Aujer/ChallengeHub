@@ -154,6 +154,17 @@ app.post('/contact', contactController.postContact);
 app.get('/create', createController.getChallenge);
 app.post('/create', createController.postChallenge);
 
+// dynamic shit
+
+app.get('/challenges/asd', function(req,res) {
+    res.send({"param" : "qwe"});
+});
+
+app.get('/challenges/:dynamicroute', function(req,res) {
+    res.send({"param" : req.params.dynamicroute});
+});
+
+
 app.get('/account/verify', passportConfig.isAuthenticated, userController.getVerifyEmail);
 app.get('/account/verify/:token', passportConfig.isAuthenticated, userController.getVerifyEmailToken);
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
@@ -172,6 +183,18 @@ app.post('/', (req, res) => {
     if (err) throw err;
     console.log("Submission uploaded successfully");
   });
+});
+
+app.post('/', (req, res) => {
+  var data = {
+    "first": req.body.first,
+    "last": req.body.last,
+    "description": req.body.description
+  }
+  db.collection('Challenge_Updates').insertOne(data,function(err, collection){ 
+    if (err) throw err; 
+    console.log("Submission uploaded successfully"); 
+  }); 
 });
 
 /**
