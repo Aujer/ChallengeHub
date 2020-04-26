@@ -6,37 +6,16 @@ block content
     
     form(id='challenge-form', method='POST')
       p
-      | Challenge Name: 
+      label(class='col-md-2 col-form-label font-weight-bold', for='challenge_name') Challenge Name: 
       input(type='text' name='challenge_name' value='')
       p
-      |          Description: 
+      label(class='col-md-2 col-form-label font-weight-bold', for='challenge_name')          Description: 
       input(type='text' name='description' value='')
       p
-      |          Submission Type: 
+      label(class='col-md-2 col-form-label font-weight-bold', for='challenge_name')          Submission Type: 
       input(type='text' name='submission_type' value='')
       p
-      |          Reward: 
+      label(class='col-md-2 col-form-label font-weight-bold', for='challenge_name')          Reward: 
       input(type='text' name='reward' value='')
-      p
+      p 
       input(type='submit' value='Submit')
-
-  //-form(method='POST')
-    input(type='hidden', name='_csrf', value=_csrf)
-    if (unknownUser)
-      .form-group.row
-        label(class='col-md-2 col-form-label font-weight-bold', for='challenge_name') Challenge Name
-        .col-md-8
-        input.form-control(required)
-      .form-group.row
-        label(class='col-md-2 col-form-label font-weight-bold', for='description') Challenge Description
-        .col-md-8
-          input.form-control(required)
-    //-.form-group.row
-      label(class='col-md-2 col-form-label font-weight-bold', for='message') What is your challenge?
-      .col-md-8
-        textarea.form-control(name='message', id='message', rows='7', autofocus=(!unknownUser).toString(), required)
-    .form-group
-      .offset-md-2.col-md-8.p-1
-        button.btn.btn-primary(type='submit')
-          i.far.fa-envelope.fa-sm
-          | Send
