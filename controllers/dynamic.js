@@ -4,6 +4,8 @@
 
 const User = require('../models/User');
 const Subscription = require('../models/Subscription');
+const Challenge = require('../models/Challenge');
+
 
 exports.index = (req, res,name) => {
 
@@ -11,7 +13,7 @@ exports.index = (req, res,name) => {
 	var db=req.db
 
 	db.collection("New Challenges").find(query).toArray(function(err, result) {
-	    
+
 	    if (err) throw err;
 	    console.log(result);
 	    if (result.length == 0) {
@@ -21,16 +23,16 @@ exports.index = (req, res,name) => {
 	      console.log("potato")
 	    }
 	    else {
-	      load_challenge_page(req,res,name,result[0])  
+	      load_challenge_page(req,res,name,result[0])
 	    }
 	  })
 
-	  
+
 	};
 
 
 load_challenge_page = (req, res,name,challenge) => {
-    var ObjectId = require('mongodb').ObjectId; 
+    var ObjectId = require('mongodb').ObjectId;
     var db=req.db;
     User.findById(challenge['creator'], (err, user) => {
 	    if (err) { return next(err); }
@@ -93,7 +95,11 @@ exports.postSignUp = (req, res) => {
   }
 };
 
+/**
+* Upload a submission for a challenge.
+*/
+exports.postFileUpload = (req, res) => {
 
-
-
-
+  req.flash('success', { msg: 'File was uploaded successfully.' });
+  res.redirect(req.header('Referer'));
+};

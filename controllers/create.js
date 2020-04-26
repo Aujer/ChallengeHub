@@ -1,8 +1,5 @@
 const validator = require('validator');
 const nodemailer = require('nodemailer');
-
-// Alex's part
-
 const Challenge = require('../models/Challenge');
 const User = require('../models/User');
 
