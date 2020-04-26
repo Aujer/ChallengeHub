@@ -7,6 +7,7 @@ const Challenge = require('../models/Challenge');
 const Subscription = require('../models/Subscription');
 const Upload = require('../models/Upload')
 const path = require('path');
+var ObjectId = require('mongodb').ObjectId; 
 
 
 exports.index = (req, res,name) => {
@@ -20,7 +21,7 @@ exports.index = (req, res,name) => {
 	    console.log(result);
 	    if (result.length == 0) {
 	      // This means we can't find the challenge
-	      console.log("sorry can't find your challenge homie")
+	      console.log("sorry can't find your challenge")
 	      load_error_page(req,res, name)
 	      console.log("potato")
 	    }
@@ -34,22 +35,32 @@ exports.index = (req, res,name) => {
 
 
 load_challenge_page = (req, res,name,challenge) => {
+	console.log("pickle pickle")
+	console.log(challenge['creator'])
+	console.log("pickle pickle")
+    //var queryNum = { challenge_name: name, user: ObjectId(challenge['creator']) };
     var queryNum = { challenge_name: name };
     db = req.db;
-    User.findById(challenge['creator'], (err, user) => {
-		  db.collection("subscriptions").find(queryNum).toArray(function(err, result) {
-		    if (err) { return next(err); }
-		    res.render('dynamic', {
-			    title: 'Dynamic',
-			    name: name,
-			    description: challenge['description'],
-			    reward: challenge['reward'],
-			    creator: user.profile.name,
-			    subscribers: result,
-			    numSubscribers: result.length
-			  });
+    // User.findById(challenge['creator'], (err, user) => {
+	  db.collection("subscriptions").find(queryNum).toArray(function(err, result) {
+	    if (err) { return next(err); }
+	    // result.filter(function(entry){ 
+	    // 	console.log()
+	    // 	return entry.user.equals("regers")})
+	    console.log('toad');
+	    console.log(result);
+	    console.log('toad');
+	    res.render('dynamic', {
+		    title: 'Dynamic',
+		    name: name,
+		    description: challenge['description'],
+		    reward: challenge['reward'],
+		    creator: challenge['creator'],
+		    subscribers: result,
+		    numSubscribers: result.length
 		  });
-		});
+	  });
+		// });
 };
 
 
@@ -92,12 +103,15 @@ exports.postSignUp = (req, res) => {
     var db = req.db;
     db.collection('subscriptions').insertOne(subscription,function(err) {
     if (err) throw err;
-    console.log("Challenge uploaded successfully!")
+    console.log("Challenge uploaded successfully!");
+    res.redirect(req.header('Referer'));
+    console.log("flannel")
     })
 
   } else {
-  	req.flash('Not Logged In', { msg: 'Please log in to join challenge!'});
-  	console.log("use isr not logged in")
+  	req.flash('success', { msg: 'Please log in to join challenge!'});
+  	console.log("user is not logged in");
+  	res.redirect(req.header('Referer'));
   }
 };
 
