@@ -2,4 +2,16 @@ extends layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-    h3 Current Challenges
+    h2 Most Popular Challenges
+    hr
+    .row
+      .col-md-6
+        p taco taco
+        - var challenge_list = list_of_challenges
+        ul
+          each val in challenge_list
+           li= val.challenge_name
+        
+         
+        
+
