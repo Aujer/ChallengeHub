@@ -11,9 +11,8 @@ const uploadSchema = new mongoose.Schema({
   challenge: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Challenge'
-  }
-  // need a way to upload the file path
-
+  },
+  path: String
 }, { timestamps: true });
 
 const Upload = mongoose.model('Upload', uploadSchema);

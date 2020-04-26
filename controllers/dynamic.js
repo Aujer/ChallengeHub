@@ -3,8 +3,9 @@
  */
 
 const User = require('../models/User');
-const Subscription = require('../models/Subscription');
 const Challenge = require('../models/Challenge');
+const Upload = require('../models/Upload')
+const path = require('path');
 
 
 exports.index = (req, res,name) => {
@@ -59,39 +60,11 @@ load_error_page = (req, res,name) => {
  * POST /challenges/signup
  * Sign up for challenge.
  */
-exports.postSignUp = (req, res) => {
-	console.log("post sign up is working")
-	console.log(req)
-	console.log(req.headers)
-
-
-  if (req.user) {
-  	req.flash('success', { msg: 'Challenge subscribed!' });
-  	console.log("mamamama")
-  	console.log(req.body)
-  	console.log("papapa")
-
-    backURL=req.header('Referer') || '/';
-  
-    res.redirect(backURL);
-
-    var subscription = new Subscription({
-
-	    challenge_name: req.challenge_name,
-	    user: req.user,
-	    //creator_name: req.user.profile.name,
-	    created: Date.now(),
-    
-  				});
-    var db = req.db;
-    db.collection('subscriptions').insertOne(subscription,function(err) {
-    if (err) throw err;
-    console.log("Challenge uploaded successfully!")
-
-    })
+exports.postSignUp = (req, res, next) => {
+  if (!req.user) {
 
   } else {
-  	console.log("use is not logged in")
+  	req.flash('success', { msg: 'Challenge accepted!' });
   }
 };
 
@@ -99,7 +72,19 @@ exports.postSignUp = (req, res) => {
 * Upload a submission for a challenge.
 */
 exports.postFileUpload = (req, res) => {
-
+	var file_path = path.resolve('myFile');
+	var upload = new Upload({
+    uploader: req.user,
+    uploader: req.user,
+		// how to link a challenge to a upload
+    created: Date.now(),
+		path: file_path
+  });
+  var db = req.db;
+  db.collection('Challenge Uploads').insertOne(upload,function(err) {
+    if (err) throw err;
+    console.log("Challenge uploaded successfully!")
+  })
   req.flash('success', { msg: 'File was uploaded successfully.' });
   res.redirect(req.header('Referer'));
 };
