@@ -13,8 +13,11 @@ block content
       h3 Reward:
       p #{reward}
   .row
+    form(action='/challenges/signup' method='POST')
+      input(type='submit' value='Sign Up For This Challenge!')
+  .row
     .col-md-8
-      h2 People Subscribed to Your Challenge
+      h2 People Subscribed to This Challenge
       ul
         each val in [1, 2, 3, 4, 5]
           li= val
