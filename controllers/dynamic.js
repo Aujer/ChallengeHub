@@ -7,7 +7,7 @@ const Challenge = require('../models/Challenge');
 const Subscription = require('../models/Subscription');
 const Upload = require('../models/Upload')
 const path = require('path');
-var ObjectId = require('mongodb').ObjectId; 
+var ObjectId = require('mongodb').ObjectId;
 
 
 exports.index = (req, res,name) => {
@@ -51,7 +51,7 @@ load_challenge_page = (req, res,name,challenge) => {
 		    	console.log(result1)
 		    	console.log("ruff2")
 		    	creator_real_name = result1[0].profile.name
-		   
+
 
 			    if (err) { return next(err); }
 
@@ -77,7 +77,7 @@ load_challenge_page = (req, res,name,challenge) => {
 			    	console.log(typeof(req.user._id))
 			    	console.log(req.user._id)
 			    	console.log("end_princess");
-			    	
+
 			    	remainder = result.filter(x => x.user.toString() == req.user._id.toString())
 
 			    	if ( remainder.length == 0) {
@@ -93,7 +93,7 @@ load_challenge_page = (req, res,name,challenge) => {
 						    updates: result2,
 						    is_already_signed_up: false
 						  	});
-	    			}	
+	    			}
 	    			else {
 	    			 	console.log("olaf");
 	    				res.render('dynamic', {
@@ -106,7 +106,7 @@ load_challenge_page = (req, res,name,challenge) => {
 					    numSubscribers: result.length,
 					    updates: result2,
 					    is_already_signed_up: true
-					  });	
+					  });
 	    					}
 	    			}
 	     	});
@@ -173,14 +173,18 @@ exports.postSignUp = (req, res) => {
 */
 exports.postFileUpload = (req, res) => {
 	//var file_path = path.resolve(req.file.originalname);
+	//var queryNum = { challenge_name: name };
+	//var db = req.db;
 	var file_path = req.file.path;
 	var upload = new Upload({
     uploader: req.user,
 		// how to link a challenge to a upload
+		//challenge: db.collection("New Challenges").find(queryNum),
+		//
     created: Date.now(),
 		path: file_path
   });
-  var db = req.db;
+	var db = req.db;
   db.collection('Challenge Uploads').insertOne(upload,function(err) {
     if (err) throw err;
     console.log("Challenge uploaded successfully!")
@@ -222,4 +226,3 @@ exports.postUpdate = (req, res, next) => {
   res.redirect(req.header('Referer'));
   //return res.redirect('/challenge-submitted');
 };
-
