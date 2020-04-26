@@ -15,9 +15,14 @@ block content
       h3 Reward:
       p #{reward}
   .row
-    form(action='/challenges/signup', method='POST')
-      input(type="hidden" name="challenge_name" value=name)
-      input(type='submit', name='sign up button', value="Sign Up For This Challenge!")
+    if is_already_signed_up
+      form(action='/challenges/unsubscribe', method='POST')
+        input(type="hidden" name="challenge_name" value=name)
+        input(type='submit', name='sign up button', value="Unsubscribe From This Challenge!")
+    else
+      form(action='/challenges/signup', method='POST')
+        input(type="hidden" name="challenge_name" value=name)
+        input(type='submit', name='sign up button', value="Sign Up For This Challenge!")
     //- button(type='button', class=' c-btn-blue c-btn-circle c-btn-uppercase', value="Read More", onclick='clickme()')
 
 
