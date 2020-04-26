@@ -2,38 +2,4 @@ extends layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-    h3 Start a New Challenge!
-  form(id='challenge-form', method='POST')
-      p
-      | Challenge Name: 
-      input(type='text' name='challenge_name' value='')
-      |          Description: 
-      input(type='text' name='description' value='')
-      input(type='submit' value='Submit')
-  
-  
-  
-//-    input(type='hidden', name='_csrf', value=_csrf)
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='challenge_name') Challenge Name
-      .col-md-7
-        input.form-control(required)
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='description') Description
-      .col-md-7
-        input.form-control(minlength='8', required)
-    .form-group.offset-sm-3.col-md-7.pl-2
-      button.btn.btn-success(type='submit')
-        | Challenge accepted!
-        
-
-        .row
-          form(action='/' method='POST')
-            p
-            | First Name: 
-            input(type='text' name='first' value='')
-            |          Last Name: 
-            input(type='text' name='last' value='')
-            |          Description: 
-            input(type='text' name='description' value='')
-            input(type='submit' value='Submit')
+    h3 Current Challenges

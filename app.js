@@ -137,9 +137,6 @@ app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawes
      next();
  });
 
-app.get('/new-challenge', challengeController.getChallenge);
-app.post('/new-challenge', challengeController.postChallenge);
-
 app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
@@ -153,14 +150,9 @@ app.post('/signup', userController.postSignup);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 
-
-app.get('/challenge', challengeController.getContact);
-app.post('/challenge', challengeController.postContact);
-
-
-app.get('/create', createController.getContact);
-app.post('/create', createController.postContact);
-
+// new for creating challenges
+app.get('/create', createController.getChallenge);
+app.post('/create', createController.postChallenge);
 
 app.get('/account/verify', passportConfig.isAuthenticated, userController.getVerifyEmail);
 app.get('/account/verify/:token', passportConfig.isAuthenticated, userController.getVerifyEmailToken);
